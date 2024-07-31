@@ -3,6 +3,6 @@ DB_USER =
 DB_PW = 
 DB_HOST = 
 DB_PORT = 
-DB_DIALECT = 
+DB_DIALECT = postgres
 SHOW_SQL = 
 JWT_SECRET = 

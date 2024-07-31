@@ -1,3 +1,4 @@
+.git/
 node_modules/
 .dockerignore
 .DS_Store
