@@ -3,6 +3,7 @@ node_modules/
 .dockerignore
 .DS_Store
 .gitignore
+docker-compose.yaml
 Dockerfile
 environmentTemplate.txt
 LICENSE.md
