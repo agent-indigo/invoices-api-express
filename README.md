@@ -16,8 +16,6 @@ A simple invoice management API using Express.js and Sequelize
 
 - A React.js front end is available [here](https://github.com/agent-indigo/invoices-web).
 
-- The Spring Boot version of this API is available [here](https://github.com/agent-indigo/invoices-api-java).
-
 ## Setup
 
 - Create a new SQL database and leave it empty.
