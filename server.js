@@ -16,12 +16,14 @@ import usersRouter from './routers/usersRouter.js'
 import setupRouter from './routers/setupRouter.js'
 connectToSQLdb()
 const server = express()
-server.use(morgan(':url,:method,:status,:response-time,:date[web]', {
-  stream: createWriteStream(join(dirname(fileURLToPath(import.meta.url)),
-    'log.csv'), {
-      flags: 'a'
-    })
-  }
+server.use(morgan(
+  ':url,:method,:status,:response-time,:date[web]',
+  {stream: createWriteStream(
+    join(
+      dirname(fileURLToPath(import.meta.url)),
+      'log.csv'),
+    {flags: 'a'}
+  )}
 ))
 server.use(express.json())
 server.use(express.urlencoded({extended: true}))
@@ -41,5 +43,5 @@ server.use(notFound)
 server.use(errorHandler)
 server.listen(
   8080,
-  () => console.log(`Server running on localhost:8080 in ${process.env.NODE_ENV} mode.`)
+  () => console.log(`Listening on port 8080 in ${process.env.NODE_ENV} mode.`)
 )

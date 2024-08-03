@@ -4,7 +4,10 @@ import Sequelize from 'sequelize'
 import sequelize from '../utilities/sequelize.js'
 const basename = path.basename(import.meta.url)
 const db = {}
-const modelFiles = fs.readdirSync(new URL('.', import.meta.url)).filter(file => (
+const modelFiles = fs.readdirSync(new URL(
+  '.',
+  import.meta.url
+)).filter(file => (
   file.indexOf('.') !== 0 &&
   file !== basename &&
   file.slice(-3) === '.js'
