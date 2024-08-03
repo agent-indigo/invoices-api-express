@@ -18,7 +18,7 @@ export const authenticate = asyncHandler(async (request, response, next) => {
     throw new Error('Token not found.')
   }
 })
-export const authorize = (...roles) =>  asyncHandler(async (request, response, next) => {
+export const authorize = (...roles) => asyncHandler(async (request, response, next) => {
   if (!roles.includes((await userModel.findByPk(request.pk)).role)) {
     response.status(401)
     throw new Error('Permission denied.')
