@@ -13,7 +13,13 @@ const modelFiles = fs.readdirSync(new URL(
   file.slice(-3) === '.js'
 ))
 for (const file of modelFiles) {
-  const model = await import(path.join(new URL('.', import.meta.url), file))
+  const model = await import(path.join(
+    new URL(
+      '.',
+      import.meta.url
+    ),
+    file
+  ))
   db[model.default.name] = model.default
 }
 for (const modelName of Object.keys(db)) if (db[modelName].associate) db[modelName].associate(db)
