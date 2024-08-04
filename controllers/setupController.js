@@ -1,14 +1,13 @@
 import bcrypt from 'bcryptjs'
 import asyncHandler from '../middleware/asyncHandler.js'
 import userModel from '../models/userModel.js'
-const root = await userModel.findOne({where: {role: 'root'}})
 /**
  * @name    getStatus
  * @desc    Get the config status (Does the root user exist?)
  * @route   GET /api/setup/status
  * @access  public
  */
-export const getStatus = asyncHandler(async (request, response) => response.status(200).json(!root))
+export const getStatus = asyncHandler(async (request, response) => response.status(200).json(!await userModel.findOne({where: {role: 'root'}})))
 /**
  * @name    createRoot
  * @desc    Create the root user
@@ -17,7 +16,7 @@ export const getStatus = asyncHandler(async (request, response) => response.stat
  */
 export const createRoot = asyncHandler(async (request, response) => {
   const {password, confirmPassword} = request.body
-  if (root) {
+  if (await userModel.findOne({where: {role: 'root'}})) {
     response.status(403)
     throw new Error('Root user already exists.')
   } else {

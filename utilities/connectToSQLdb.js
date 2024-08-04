@@ -1,7 +1,5 @@
 import 'dotenv/config'
 import sequelize from './sequelize.js'
-import invoiceModel from '../models/invoiceModel.js'
-import userModel from '../models/userModel.js'
 const connectToSQLdb = async () => {
   try {
     await sequelize.authenticate()
@@ -10,8 +8,7 @@ const connectToSQLdb = async () => {
     process.exit(1)
   }
   try {
-    await invoiceModel.sync()
-    await userModel.sync()
+    await sequelize.sync()
   } catch (error) {
     console.error(`Error synchronizing schema:\n${error}`)
     process.exit(1)
