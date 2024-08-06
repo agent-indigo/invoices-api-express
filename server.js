@@ -1,4 +1,3 @@
-import 'dotenv/config'
 import {createWriteStream} from 'fs'
 import {dirname, join} from 'path'
 import {fileURLToPath} from 'url'

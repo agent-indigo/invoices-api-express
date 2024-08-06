@@ -1,4 +1,3 @@
-import 'dotenv/config'
 import errorMessage from '../utilities/errorMessage.js'
 export const notFound = (request, response, next) => {
   response.status(404)
