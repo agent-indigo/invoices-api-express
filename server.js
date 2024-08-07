@@ -8,7 +8,10 @@ import helmet from 'helmet'
 import hpp from 'hpp'
 import cors from 'cors'
 import rateLimit from 'express-rate-limit'
-import {notFound, errorHandler} from './middleware/errorHandler.js'
+import {
+  notFound,
+  errorHandler
+} from './middleware/errorHandler.js'
 import connectToSQLdb from './utilities/connectToSQLdb.js'
 import invoicesRouter from './routers/invoicesRouter.js'
 import usersRouter from './routers/usersRouter.js'
@@ -16,13 +19,15 @@ import setupRouter from './routers/setupRouter.js'
 connectToSQLdb()
 const server = express()
 server.use(morgan(
-  ':url,:method,:status,:response-time,:date[web]',
-  {stream: createWriteStream(
-    join(
-      dirname(fileURLToPath(import.meta.url)),
-      'log.csv'),
-    {flags: 'a'}
-  )}
+  ':url,:method,:status,:response-time,:date[web]', {
+    stream: createWriteStream(
+      join(
+        dirname(fileURLToPath(import.meta.url)),
+        'log.csv'
+      ),
+      {flags: 'a'}
+    )
+  }
 ))
 server.use(express.json())
 server.use(express.urlencoded({extended: true}))
@@ -41,7 +46,7 @@ server.use('/api/setup', setupRouter)
 server.use(notFound)
 server.use(errorHandler)
 server.listen(
-  8080, () => console.log(
-    `Listening on port 8080 in ${process.env.NODE_ENV} mode.`
-  )
+  8080, () => console.log(`Listening on port 8080 in ${
+    process.env.NODE_ENV
+  } mode.`)
 )
