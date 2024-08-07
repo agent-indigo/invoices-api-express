@@ -1,11 +1,15 @@
-export const up = async (queryInterface, Sequelize) => {
-  await queryInterface.createTable('invoices', {
+export const up = async (
+  queryInterface,
+  Sequelize
+) => await queryInterface.createTable(
+  'invoices',
+  {
     pk: {
       type: Sequelize.INTEGER,
-        allowNull: false,
-        primaryKey: true,
-        autoIncrement: true
-      },
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true
+    },
     vendor: {
       type: Sequelize.STRING,
       allowNull: false
@@ -37,6 +41,8 @@ export const up = async (queryInterface, Sequelize) => {
     },
     createdAt: Sequelize.DATE,
     updatedAt: Sequelize.DATE
-  })
-}
-export const down = async (queryInterface, Sequelize) => await queryInterface.dropTable('invoices')
+})
+export const down = async (
+  queryInterface,
+  Sequelize
+) => await queryInterface.dropTable('invoices')

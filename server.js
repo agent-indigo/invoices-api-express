@@ -41,6 +41,7 @@ server.use('/api/setup', setupRouter)
 server.use(notFound)
 server.use(errorHandler)
 server.listen(
-  8080,
-  () => console.log(`Listening on port 8080 in ${process.env.NODE_ENV} mode.`)
+  8080, () => console.log(
+    `Listening on port 8080 in ${process.env.NODE_ENV} mode.`
+  )
 )

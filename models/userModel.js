@@ -24,7 +24,10 @@ userModel.init({
     allowNull: false
   },
   role: {
-    type: DataTypes.ENUM('root', 'user'),
+    type: DataTypes.ENUM(
+      'root',
+      'user'
+    ),
     allowNull: false,
     defaultValue: 'user'
   }
@@ -36,12 +39,9 @@ userModel.init({
   hooks: {
     async beforeCreate(user) {
       if (user.role === 'root') {
-        const root = await userModel.findOne({
-          where: {
-            role: 'root'
-          }
-        })
-        if (root) {
+        if (await userModel.findOne({where: {
+          role: 'root'
+        }})) {
           throw new Error(
             'There can be only one root user.'
           )

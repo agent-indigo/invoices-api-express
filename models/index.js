@@ -10,7 +10,8 @@ const modelFiles = fs.readdirSync(new URL(
 )).filter(file => (
   file.indexOf('.') !== 0 &&
   file !== basename &&
-  file.slice(-3) === '.js'
+  file.slice(-8) === 'Model.js' &&
+  file.indexOf('.test') === -1
 ))
 for (const file of modelFiles) {
   const model = await import(path.join(
@@ -22,7 +23,11 @@ for (const file of modelFiles) {
   ))
   db[model.default.name] = model.default
 }
-for (const modelName of Object.keys(db)) if (db[modelName].associate) db[modelName].associate(db)
+for (const modelName of Object.keys(db)) {
+  if (db[modelName].associate) {
+    db[modelName].associate(db)
+  }
+}
 db.sequelize = sequelize
 db.Sequelize = Sequelize
 export default db

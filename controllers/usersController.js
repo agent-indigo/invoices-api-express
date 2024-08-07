@@ -51,7 +51,7 @@ export const logout = (request, response) => {
 export const changePassword = asyncHandler(async(request, response) => {
   const {currentPassword, newPassword, confirmNewPassword} = request.body
   const user = await userModel.findByPk(jwt.verify(
-    request.cookies.token || request.header('Authorization').substring(7),
+    request.cookies.token || request.header('Authorization')?.substring(7),
     process.env.JWT_SECRET
   ).pk)
   if (!user) {
@@ -88,7 +88,7 @@ export const resetPassword = asyncHandler(async (request, response) => {
     throw new Error('User not found.')
   } else {
     if (await userModel.findByPk(jwt.verify(
-      request.cookies.token || request.header('Authorization').substring(7),
+      request.cookies.token || request.header('Authorization')?.substring(7),
       process.env.JWT_SECRET
     ).pk).pk === user.pk) {
       response.status(403)
@@ -135,7 +135,10 @@ export const addUser = asyncHandler(async (request, response) => {
  * @route   GET /api/users
  * @access  private/root
  */
-export const listUsers = asyncHandler(async (request, response) => response.status(200).json(await userModel.findAll({
+export const listUsers = asyncHandler(async (
+  request,
+  response
+) => response.status(200).json(await userModel.findAll({
   attributes: {
     exclude: ['shadow']
   }

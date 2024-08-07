@@ -5,7 +5,10 @@ import userModel from '../models/userModel.js'
 export const authenticate = asyncHandler(async (request, response, next) => {
   const token = request.cookies.token || request.header('Authorization')?.substring(7)
   if (token) {
-    const user = await userModel.findByPk(jwt.verify(token, process.env.JWT_SECRET).pk)
+    const user = await userModel.findByPk(jwt.verify(
+      token,
+      process.env.JWT_SECRET
+    ).pk)
     if (user) {
       request.pk = user.pk
       next()

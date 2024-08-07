@@ -21,7 +21,10 @@ export const addInvoice = asyncHandler(async (request, response) => {
  * @route   GET /api/invoices
  * @access  private
  */
-export const listInvoices = asyncHandler(async (request, response) => response.status(200).json(await invoiceModel.findAll()))
+export const listInvoices = asyncHandler(async (
+  request,
+  response
+) => response.status(200).json(await invoiceModel.findAll()))
 /**
  * @name    editInvoice
  * @desc    Edit a Invoice

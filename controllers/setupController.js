@@ -7,7 +7,12 @@ import userModel from '../models/userModel.js'
  * @route   GET /api/setup/status
  * @access  public
  */
-export const getStatus = asyncHandler(async (request, response) => response.status(200).json(!await userModel.findOne({where: {role: 'root'}})))
+export const getStatus = asyncHandler(async (
+  request,
+  response
+) => response.status(200).json(!await userModel.findOne({where: {
+  role: 'root'
+}})))
 /**
  * @name    createRoot
  * @desc    Create the root user

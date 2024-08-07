@@ -17,10 +17,16 @@ usersRouter.post('/login', login)
 usersRouter.use(authenticate)
 usersRouter.use(authorize('user', 'root'))
 usersRouter.get('/logout', logout)
-usersRouter.patch('/changePassword', changePassword)
+usersRouter.patch(
+  '/changePassword',
+  changePassword
+)
 usersRouter.use(authorize('root'))
 usersRouter.post('/', addUser)
 usersRouter.get('/', listUsers)
 usersRouter.delete('/:pk', deleteUser)
-usersRouter.patch('/resetPassword/:pk', resetPassword)
+usersRouter.patch(
+  '/resetPassword/:pk',
+  resetPassword
+)
 export default usersRouter
