@@ -7,7 +7,7 @@ import {
   addUser,
   listUsers,
   deleteUser
-} from '../controllers/usersController.js'
+} from '../services/userServices.js'
 import {
   authenticate,
   authorize

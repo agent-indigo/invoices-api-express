@@ -4,7 +4,7 @@ import {
   listInvoices,
   editinvoice,
   deleteInvoice
-} from '../controllers/invoicesController.js'
+} from '../services/invoiceServices.js'
 import {
   authenticate,
   authorize

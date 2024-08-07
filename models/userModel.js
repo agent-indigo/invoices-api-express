@@ -1,8 +1,8 @@
 import {Model, DataTypes} from 'sequelize'
 import createPk from '../utilities/createPk.js'
 import sequelize from '../utilities/sequelize.js'
-class userModel extends Model {}
-userModel.init({
+class UserModel extends Model {}
+UserModel.init({
   ...createPk(),
   name: {
     type: DataTypes.STRING,
@@ -30,7 +30,7 @@ userModel.init({
   hooks: {
     async beforeCreate(user) {
       if (user.role === 'root') {
-        if (await userModel.findOne({where: {
+        if (await UserModel.findOne({where: {
           role: 'root'
         }})) {
           throw new Error(
@@ -41,4 +41,4 @@ userModel.init({
     }
   }
 })
-export default userModel
+export default UserModel

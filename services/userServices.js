@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import asyncHandler from '../middleware/asyncHandler.js'
 import createToken from '../utilities/createToken.js'
-import userModel from '../models/userModel.js'
+import UserModel from '../models/UserModel.js'
 /**
  * @name    login
  * @desc    Log in a user
@@ -12,7 +12,7 @@ import userModel from '../models/userModel.js'
  */
 export const login = asyncHandler(async (request, response) => {
   const {name, password} = request.body
-  const user = await userModel.findOne({where: {name}})
+  const user = await UserModel.findOne({where: {name}})
   if (!name || !password) {
     response.status(400)
     throw new Error('At least one field is empty.')
@@ -50,7 +50,7 @@ export const logout = (request, response) => {
  */
 export const changePassword = asyncHandler(async(request, response) => {
   const {currentPassword, newPassword, confirmNewPassword} = request.body
-  const user = await userModel.findByPk(jwt.verify(
+  const user = await UserModel.findByPk(jwt.verify(
     request.cookies.token || request.header('Authorization')?.substring(7),
     process.env.JWT_SECRET
   ).pk)
@@ -82,12 +82,12 @@ export const changePassword = asyncHandler(async(request, response) => {
  */
 export const resetPassword = asyncHandler(async (request, response) => {
   const {pk, newPassword, confirmNewPassword} = request.body
-  const user = await userModel.findByPk(pk)
+  const user = await UserModel.findByPk(pk)
   if (!user) {
     response.status(404)
     throw new Error('User not found.')
   } else {
-    if (await userModel.findByPk(jwt.verify(
+    if (await UserModel.findByPk(jwt.verify(
       request.cookies.token || request.header('Authorization')?.substring(7),
       process.env.JWT_SECRET
     ).pk).pk === user.pk) {
@@ -121,7 +121,7 @@ export const addUser = asyncHandler(async (request, response) => {
     response.status(400)
     throw new Error('At least one field is empty.')
   } else {
-    await userModel.create({
+    await UserModel.create({
       name,
       shadow: await bcrypt.hash(password, 10),
       role: 'user'
@@ -138,7 +138,7 @@ export const addUser = asyncHandler(async (request, response) => {
 export const listUsers = asyncHandler(async (
   request,
   response
-) => response.status(200).json(await userModel.findAll({
+) => response.status(200).json(await UserModel.findAll({
   attributes: {
     exclude: ['shadow']
   }
@@ -150,7 +150,7 @@ export const listUsers = asyncHandler(async (
  * @access  private/root
  */
 export const deleteUser = asyncHandler(async (request, response) => {
-  const user = await userModel.findByPk(request.params.pk)
+  const user = await UserModel.findByPk(request.params.pk)
   if (!user) {
     response.status(404)
     throw new Error('User not found.')

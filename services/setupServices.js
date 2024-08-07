@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs'
 import asyncHandler from '../middleware/asyncHandler.js'
-import userModel from '../models/userModel.js'
+import UserModel from '../models/UserModel.js'
 /**
  * @name    getStatus
  * @desc    Get the config status (Does the root user exist?)
@@ -10,7 +10,7 @@ import userModel from '../models/userModel.js'
 export const getStatus = asyncHandler(async (
   request,
   response
-) => response.status(200).json(!await userModel.findOne({where: {
+) => response.status(200).json(!await UserModel.findOne({where: {
   role: 'root'
 }})))
 /**
@@ -21,7 +21,7 @@ export const getStatus = asyncHandler(async (
  */
 export const createRoot = asyncHandler(async (request, response) => {
   const {password, confirmPassword} = request.body
-  if (await userModel.findOne({where: {role: 'root'}})) {
+  if (await UserModel.findOne({where: {role: 'root'}})) {
     response.status(403)
     throw new Error('Root user already exists.')
   } else {
@@ -32,7 +32,7 @@ export const createRoot = asyncHandler(async (request, response) => {
       response.status(403)
       throw new Error('At least one field is empty')
     } else {
-      await userModel.create({
+      await UserModel.create({
         name: 'root',
         shadow: await bcrypt.hash(password, 10),
         role: 'root'

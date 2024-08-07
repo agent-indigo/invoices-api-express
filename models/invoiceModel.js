@@ -1,8 +1,8 @@
 import {Model, DataTypes} from 'sequelize'
 import createPk from '../utilities/createPk.js'
 import sequelize from '../utilities/sequelize.js'
-class invoiceModel extends Model {}
-invoiceModel.init({
+class InvoiceModel extends Model {}
+InvoiceModel.init({
   ...createPk(),
   vendor: {
     type: DataTypes.STRING,
@@ -39,4 +39,4 @@ invoiceModel.init({
   tableName: 'invoices',
   timestamps: true
 })
-export default invoiceModel
+export default InvoiceModel

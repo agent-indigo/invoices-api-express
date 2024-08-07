@@ -1,5 +1,5 @@
 import asyncHandler from '../middleware/asyncHandler.js'
-import invoiceModel from '../models/invoiceModel.js'
+import InvoiceModel from '../models/InvoiceModel.js'
 /**
  * @name    addInvoice
  * @desc    Add a invoice
@@ -13,7 +13,7 @@ export const addInvoice = asyncHandler(async (request, response) => {
       throw new Error(`Field "${key}" is empty.`)
     }
   }
-  response.status(201).json(await invoiceModel.create(request.body))
+  response.status(201).json(await InvoiceModel.create(request.body))
 })
 /**
  * @name    listInvoices
@@ -24,7 +24,7 @@ export const addInvoice = asyncHandler(async (request, response) => {
 export const listInvoices = asyncHandler(async (
   request,
   response
-) => response.status(200).json(await invoiceModel.findAll()))
+) => response.status(200).json(await InvoiceModel.findAll()))
 /**
  * @name    editInvoice
  * @desc    Edit a Invoice
@@ -32,7 +32,7 @@ export const listInvoices = asyncHandler(async (
  * @access  private
  */
 export const editinvoice = asyncHandler(async (request, response) => {
-  const invoice = await invoiceModel.findByPk(request.params.pk)
+  const invoice = await InvoiceModel.findByPk(request.params.pk)
   if (!invoice) {
     response.status(404)
     throw new Error('Invoice not found.')
@@ -54,7 +54,7 @@ export const editinvoice = asyncHandler(async (request, response) => {
  * @access  private
  */
 export const deleteInvoice = asyncHandler(async (request, response) => {
-  const invoice = await invoiceModel.findByPk(request.params.pk)
+  const invoice = await InvoiceModel.findByPk(request.params.pk)
   if (!invoice) {
     response.status(404)
     throw new Error('Invoice not found.')

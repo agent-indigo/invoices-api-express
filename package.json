@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
-    "start": "NODE_ENV=production node server",
-    "dev": "NODE_ENV=development nodemon server"
+    "start": "NODE_ENV=production node app",
+    "dev": "NODE_ENV=development nodemon app"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
