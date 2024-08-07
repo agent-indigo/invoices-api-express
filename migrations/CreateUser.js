@@ -1,3 +1,4 @@
+import migratePk from '../utilities/migratePk'
 export const up = async (
   queryInterface,
   Sequelize
@@ -5,12 +6,7 @@ export const up = async (
   await queryInterface.createTable(
     'users',
     {
-      pk: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        primaryKey: true,
-        autoIncrement: true
-      },
+      ...migratePk(Sequelize),
       name: {
         type: Sequelize.STRING,
         allowNull: false,
