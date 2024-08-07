@@ -8,22 +8,17 @@ userModel.init({
     type: DataTypes.STRING,
     allowNull: false,
     unique: true,
-    validate: {
-      notContains: {
-        args: [' '],
-        msg: 'Spaces prohibited.'
-      }
-    }
+    validate: {notContains: {
+      args: [' '],
+      msg: 'Spaces prohibited.'
+    }}
   },
   shadow: {
     type: DataTypes.STRING,
     allowNull: false
   },
   role: {
-    type: DataTypes.ENUM(
-      'root',
-      'user'
-    ),
+    type: DataTypes.ENUM('root','user'),
     allowNull: false,
     defaultValue: 'user'
   }
