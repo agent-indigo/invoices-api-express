@@ -22,8 +22,6 @@ A simple invoice management API using Express.js and Sequelize
 
 - Copy `environmentTemplate.txt` to `.env` and fill in the values.
 
-- Start the application and server simultaneously by running `npm run stack`.
+- When running a front end for the first time, you will be prompted to create a password for `root`.
 
-- When running the application for the first time, you will be prompted to create a password for `root`.
-
-- The SQL schema will synchronize automatically every time you start the server.
+- The schema will synchronize automatically every time you start the server.
