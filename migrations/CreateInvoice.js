@@ -1,15 +1,11 @@
+import migratePk from '../utilities/migratePk'
 export const up = async (
   queryInterface,
   Sequelize
 ) => await queryInterface.createTable(
   'invoices',
   {
-    pk: {
-      type: Sequelize.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true
-    },
+    ...migratePk(Sequelize),
     vendor: {
       type: Sequelize.STRING,
       allowNull: false

@@ -1,13 +1,9 @@
 import {Model, DataTypes} from 'sequelize'
+import createPk from '../utilities/createPk.js'
 import sequelize from '../utilities/sequelize.js'
 class userModel extends Model {}
 userModel.init({
-  pk: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    primaryKey: true,
-    autoIncrement: true
-  },
+  ...createPk(),
   name: {
     type: DataTypes.STRING,
     allowNull: false,

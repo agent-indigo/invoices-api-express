@@ -1,13 +1,9 @@
 import {Model, DataTypes} from 'sequelize'
+import createPk from '../utilities/createPk.js'
 import sequelize from '../utilities/sequelize.js'
 class invoiceModel extends Model {}
 invoiceModel.init({
-  pk: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    primaryKey: true,
-    autoIncrement: true
-  },
+  ...createPk(),
   vendor: {
     type: DataTypes.STRING,
     allowNull: false
