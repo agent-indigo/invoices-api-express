@@ -8,6 +8,6 @@ const sequelize = new Sequelize({
   port: process.env.DB_PORT,
   dialect: process.env.DB_DIALECT,
   dialectOptions: {ssl: {prefer: true}},
-  logging: process.env.SHOW_SQL.toLowerCase() === 'true'
+  logging: process.env.NODE_ENV === 'development'
 })
 export default sequelize

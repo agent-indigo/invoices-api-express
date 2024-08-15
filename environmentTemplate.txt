@@ -4,5 +4,4 @@ DB_PW =
 DB_HOST = localhost
 DB_PORT = 5432
 DB_DIALECT = postgres
-SHOW_SQL = false
 JWT_SECRET = 
