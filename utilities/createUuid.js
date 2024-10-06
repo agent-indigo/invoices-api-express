@@ -1,7 +1,9 @@
-import {DataTypes} from 'sequelize'
-const createPk = () => {
+import {
+  DataTypes
+} from 'sequelize'
+const createUuid = () => {
   return {
-    pk: {
+    uuid: {
       type: DataTypes.UUID,
       allowNull: false,
       primaryKey: true,
@@ -9,4 +11,4 @@ const createPk = () => {
     }
   }
 }
-export default createPk
+export default createUuid

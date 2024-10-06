@@ -1,25 +1,37 @@
-import {Model, DataTypes} from 'sequelize'
-import createPk from '../utilities/createPk.js'
+import {
+  Model,
+  DataTypes
+} from 'sequelize'
+import createUuid from '../utilities/createUuid.js'
 import sequelize from '../utilities/sequelize.js'
 class InvoiceModel extends Model {}
 InvoiceModel.init({
-  ...createPk(),
+  ...createUuid(),
   vendor: {
     type: DataTypes.STRING,
     allowNull: false
   },
   subtotal: {
-    type: DataTypes.DECIMAL(7, 2),
+    type: DataTypes.DECIMAL(
+      7,
+      2
+    ),
     allowNull: false,
     defaultValue: 0.0
   },
   hst: {
-    type: DataTypes.DECIMAL(6, 2),
+    type: DataTypes.DECIMAL(
+      6,
+      2
+    ),
     allowNull: false,
     defaultValue: 0.0
   },
   total: {
-    type: DataTypes.DECIMAL(7, 2),
+    type: DataTypes.DECIMAL(
+      7,
+      2
+    ),
     allowNull: false,
     defaultValue: 0.0
   },

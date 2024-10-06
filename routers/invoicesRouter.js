@@ -1,19 +1,24 @@
-import {Router} from 'express'
 import {
-  addInvoice,
-  listInvoices,
-  editinvoice,
-  deleteInvoice
-} from '../services/invoiceServices.js'
-import {
-  authenticate,
-  authorize
-} from '../middleware/securityHandler.js'
+  Router
+} from 'express'
+import addInvoice from '../services/invoices/addInvoice.js'
+import deleteInvoice from '../services/invoices/deleteInvoice.js'
+import editinvoice from '../services/invoices/editInvoice.js'
+import listInvoices from '../services/invoices/listInvoices.js'
+import authenticate from '../middleware/authenticate.js'
+import authorize from '../middleware/authorize.js'
 const invoicesRouter = Router()
 invoicesRouter.use(authenticate)
-invoicesRouter.use(authorize('user', 'root'))
-invoicesRouter.get('/', listInvoices)
-invoicesRouter.post('/', addInvoice)
-invoicesRouter.put('/:pk', editinvoice)
-invoicesRouter.delete('/:pk', deleteInvoice)
+invoicesRouter.use(authorize(
+  'user',
+  'root'
+))
+invoicesRouter
+.route('/')
+.get(listInvoices)
+.post(addInvoice)
+invoicesRouter
+.route('/:uuid')
+.put(editinvoice)
+.delete(deleteInvoice)
 export default invoicesRouter

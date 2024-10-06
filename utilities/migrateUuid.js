@@ -1,6 +1,6 @@
-const migratePk = Sequelize => {
+const migrateUuid = Sequelize => {
   return {
-    pk: {
+    uuid: {
       type: Sequelize.UUID,
       allowNull: false,
       primaryKey: true,
@@ -8,4 +8,4 @@ const migratePk = Sequelize => {
     }
   }
 }
-export default migratePk
+export default migrateUuid

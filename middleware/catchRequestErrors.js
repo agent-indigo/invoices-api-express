@@ -1,4 +1,4 @@
-const asyncHandler = fn => (
+const catchRequestErrors = fn => (
   request,
   response,
   next
@@ -7,4 +7,4 @@ const asyncHandler = fn => (
   response,
   next
 )).catch(next)
-export default asyncHandler
+export default catchRequestErrors
