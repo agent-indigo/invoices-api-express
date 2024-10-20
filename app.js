@@ -69,7 +69,7 @@ connectSequelize().then(() => app.listen(
   () => console.log(`Listening on http${
     process.env.NODE_ENV === 'production' ? 's' : ''
   }://${
-    process.env.DOMAIN ?? ''
+    process.env.DOMAIN ?? 'localhost'
   }:8080 in ${
     process.env.NODE_ENV
   } mode.`)
