@@ -1,3 +1,4 @@
+DOMAIN = localhost
 DB_NAME = invoices
 DB_USER = postgres
 DB_PW = 

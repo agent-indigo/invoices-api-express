@@ -5,8 +5,8 @@ const connectSequelize = async () => {
     try {
       await sequelize.authenticate()
       connected = true
-      await sequelize.sync()
       console.log('Sequelize successfully connected.')
+      await sequelize.sync()
       console.log('Schema successfully synchronized.')
     } catch (error) {
       console.error(error)

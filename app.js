@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import {
   createWriteStream
 } from 'fs'
@@ -22,18 +23,6 @@ import invoicesRouter from './routers/invoicesRouter.js'
 import usersRouter from './routers/usersRouter.js'
 import setupRouter from './routers/setupRouter.js'
 const app = express()
-app.use(morgan(
-  ':url,:method,:status,:response-time,:date[web]', {
-    stream: createWriteStream(
-      join(
-        dirname(fileURLToPath(import.meta.url)),
-        'log.csv'
-      ), {
-        flags: 'a'
-      }
-    )
-  }
-))
 app.use(
   express.json(),
   express.urlencoded({
@@ -47,7 +36,19 @@ app.use(
   rateLimit({
     windowMs: 10 * 60 * 1000,
     max: 100
-  })
+  }),
+  morgan(
+    ':url,:method,:status,:response-time,:date[web]', {
+      stream: createWriteStream(
+        join(
+          dirname(fileURLToPath(import.meta.url)),
+          'log.csv'
+        ), {
+          flags: 'a'
+        }
+      )
+    }
+  )
 )
 app.use(
   '/users',
@@ -63,9 +64,13 @@ app.use(
 )
 app.use(send404responses)
 app.use(sendErrorResponses)
-connectSequelize().then(app.listen(
+connectSequelize().then(() => app.listen(
   8080,
-  () => console.log(`Listening on port 8080 in ${
+  () => console.log(`Listening on http${
+    process.env.NODE_ENV === 'production' ? 's' : ''
+  }://${
+    process.env.DOMAIN ?? ''
+  }:8080 in ${
     process.env.NODE_ENV
   } mode.`)
 ))
