@@ -6,7 +6,7 @@ const createToken = (
   const token = jwt.sign({
     uuid
   },
-  process.env.JWT_SECRET, {
+  process.env.JWT_SECRET ?? '', {
     expiresIn: '30d'
   })
   response.cookie(
