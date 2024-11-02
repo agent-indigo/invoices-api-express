@@ -1,6 +1,4 @@
-import {
-  Router
-} from 'express'
+import {Router} from 'express'
 import addUser from '../services/users/addUser.js'
 import changePassword from '../services/users/changePassword.js'
 import deleteUser from '../services/users/deleteUser.js'

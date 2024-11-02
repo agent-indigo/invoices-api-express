@@ -1,6 +1,4 @@
-import {
-  Router
-} from 'express'
+import {Router} from 'express'
 import addInvoice from '../services/invoices/addInvoice.js'
 import deleteInvoice from '../services/invoices/deleteInvoice.js'
 import editinvoice from '../services/invoices/editInvoice.js'

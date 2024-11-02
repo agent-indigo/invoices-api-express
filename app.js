@@ -1,14 +1,10 @@
 import 'dotenv/config'
-import {
-  createWriteStream
-} from 'fs'
+import {createWriteStream} from 'fs'
 import {
   dirname,
   join
 } from 'path'
-import {
-  fileURLToPath
-} from 'url'
+import {fileURLToPath} from 'url'
 import express from 'express'
 import morgan from 'morgan'
 import cookieParser from 'cookie-parser'

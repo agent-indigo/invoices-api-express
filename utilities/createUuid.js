@@ -1,6 +1,4 @@
-import {
-  DataTypes
-} from 'sequelize'
+import {DataTypes} from 'sequelize'
 const createUuid = () => {
   return {
     uuid: {
