@@ -1,4 +1,3 @@
-import 'dotenv/config'
 import jwt from 'jsonwebtoken'
 import catchRequestErrors from './catchRequestErrors.js'
 import UserModel from '../models/UserModel.js'
@@ -7,7 +6,7 @@ const authenticate = catchRequestErrors(async (
   response,
   next
 ) => {
-  const token = request.cookies.token || request.header('Authorization')?.substring(7)
+  const token = request.cookies.token ?? request.header('Authorization')?.substring(7)
   if (token) {
     const user = await UserModel.findByPk(jwt.verify(
       token,
