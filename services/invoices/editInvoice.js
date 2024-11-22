@@ -3,14 +3,14 @@ import InvoiceModel from '../../models/InvoiceModel.js'
 /**
  * @name    editInvoice
  * @desc    Edit a Invoice
- * @route   PUT /api/invoices/:uuid
+ * @route   PUT /api/invoices/:id
  * @access  private
  */
 const editinvoice = catchRequestErrors(async (
   request,
   response
 ) => {
-  const invoice = await InvoiceModel.findByPk(request.params.uuid)
+  const invoice = await InvoiceModel.findByPk(request.params.id)
   if (!invoice) {
     response.status(404)
     throw new Error('Invoice not found.')

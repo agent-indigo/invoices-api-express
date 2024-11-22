@@ -11,9 +11,9 @@ const authenticate = catchRequestErrors(async (
     const user = await UserModel.findByPk(jwt.verify(
       token,
       process.env.JWT_SECRET
-    ).uuid)
+    ).id)
     if (user) {
-      request.uuid = user.uuid
+      request.id = user.id
       next()
     } else {
       response.status(401)

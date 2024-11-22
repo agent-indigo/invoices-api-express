@@ -2,11 +2,11 @@ import {
   Model,
   DataTypes
 } from 'sequelize'
-import createUuid from '../utilities/createUuid.js'
+import createId from '../utilities/createId.js'
 import sequelize from '../utilities/sequelize.js'
 class InvoiceModel extends Model {}
 InvoiceModel.init({
-  ...createUuid(),
+  ...createId(),
   vendor: {
     type: DataTypes.STRING,
     allowNull: false

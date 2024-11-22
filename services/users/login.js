@@ -40,7 +40,7 @@ const login = catchRequestErrors(async (
         role: user.role,
         token: createToken(
           response,
-          user.uuid
+          user.id
         )
       })
     }

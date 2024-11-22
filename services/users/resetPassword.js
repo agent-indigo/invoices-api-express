@@ -5,7 +5,7 @@ import UserModel from '../../models/UserModel.js'
 /**
  * @name    resetPassword
  * @desc    Reset a user's password
- * @route   PATCH /api/users/resetPassword/:uuid
+ * @route   PATCH /api/users/resetPassword/:id
  * @access  private/root
  */
 const resetPassword = catchRequestErrors(async (
@@ -13,11 +13,11 @@ const resetPassword = catchRequestErrors(async (
   response
 ) => {
   const {
-    uuid,
+    id,
     newPassword,
     confirmNewPassword
   } = request.body
-  const user = await UserModel.findByPk(uuid)
+  const user = await UserModel.findByPk(id)
   if (!user) {
     response.status(404)
     throw new Error('User not found.')
@@ -25,7 +25,7 @@ const resetPassword = catchRequestErrors(async (
     if (await UserModel.findByPk(jwt.verify(
       request.cookies.token || request.header('Authorization')?.substring(7),
       process.env.JWT_SECRET
-    ).uuid).uuid === user.uuid) {
+    ).id).id === user.id) {
       response.status(403)
       throw new Error('You can\'t change your own password this way.')
     } else if (!newPassword || !confirmNewPassword) {

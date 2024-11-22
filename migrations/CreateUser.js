@@ -1,12 +1,13 @@
-import migrateUuid from '../utilities/migrateUuid.js'
+import {DataTypes} from 'sequelize'
+import createId from '../utilities/createId.js'
 export const up = async (
   queryInterface,
   Sequelize
 ) => {
   await queryInterface.createTable('users', {
-    ...migrateUuid(Sequelize),
+    ...createId(),
     name: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       unique: true,
       validate: {
@@ -19,19 +20,19 @@ export const up = async (
       }
     },
     shadow: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     role: {
-      type: Sequelize.ENUM(
+      type: DataTypes.ENUM(
         'root',
         'user'
       ),
       allowNull: false,
       defaultValue: 'user'
     },
-    createdAt: Sequelize.DATE,
-    updatedAt: Sequelize.DATE
+    createdAt: DataTypes.DATE,
+    updatedAt: DataTypes.DATE
   })
   await queryInterface.addConstraint(
     'users', {

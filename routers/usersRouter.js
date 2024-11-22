@@ -32,11 +32,11 @@ usersRouter
 .get(listUsers)
 .post(addUser)
 usersRouter.delete(
-  '/:uuid',
+  '/:id',
   deleteUser
 )
 usersRouter.patch(
-  '/resetPassword/:uuid',
+  '/resetPassword/:id',
   resetPassword
 )
 export default usersRouter

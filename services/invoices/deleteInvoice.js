@@ -3,14 +3,14 @@ import InvoiceModel from '../../models/InvoiceModel.js'
 /**
  * @name    deleteInvoice
  * @desc    Delete a invoice
- * @route   DELETE /api/invoices/:uuid
+ * @route   DELETE /api/invoices/:id
  * @access  private
  */
 const deleteInvoice = catchRequestErrors(async (
   request,
   response
 ) => {
-  const invoice = await InvoiceModel.findByPk(request.params.uuid)
+  const invoice = await InvoiceModel.findByPk(request.params.id)
   if (!invoice) {
     response.status(404)
     throw new Error('Invoice not found.')

@@ -3,14 +3,14 @@ import UserModel from '../../models/UserModel.js'
 /**
  * @name    deleteUser
  * @desc    Delete a user
- * @route   DELETE /api/users/:uuid
+ * @route   DELETE /api/users/:id
  * @access  private/root
  */
 const deleteUser = catchRequestErrors(async (
   request,
   response
 ) => {
-  const user = await UserModel.findByPk(request.params.uuid)
+  const user = await UserModel.findByPk(request.params.id)
   if (!user) {
     response.status(404)
     throw new Error('User not found.')

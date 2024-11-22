@@ -16,7 +16,7 @@ invoicesRouter
 .get(listInvoices)
 .post(addInvoice)
 invoicesRouter
-.route('/:uuid')
+.route('/:id')
 .put(editinvoice)
 .delete(deleteInvoice)
 export default invoicesRouter

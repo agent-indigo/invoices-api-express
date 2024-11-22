@@ -20,7 +20,7 @@ const changePassword = catchRequestErrors(async (
   const user = await UserModel.findByPk(jwt.verify(
     request.cookies.token || request.header('Authorization')?.substring(7),
     process.env.JWT_SECRET
-  ).uuid)
+  ).id)
   if (!user) {
     response.status(404)
     throw new Error('User not found.')

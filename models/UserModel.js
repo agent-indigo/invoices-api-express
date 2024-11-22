@@ -2,11 +2,11 @@ import {
   Model,
   DataTypes
 } from 'sequelize'
-import createUuid from '../utilities/createUuid.js'
+import createId from '../utilities/createId.js'
 import sequelize from '../utilities/sequelize.js'
 class UserModel extends Model {}
 UserModel.init({
-  ...createUuid(),
+  ...createId(),
   name: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -39,7 +39,7 @@ UserModel.init({
   timestamps: true,
   hooks: {
     async beforeCreate(user) {
-      if (user.role === 'root') {
+      if (user.get('role') === 'root') {
         if (await UserModel.findOne({
           where: {
             role: 'root'

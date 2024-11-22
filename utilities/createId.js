@@ -1,7 +1,7 @@
 import {DataTypes} from 'sequelize'
-const createUuid = () => {
+const createId = () => {
   return {
-    uuid: {
+    id: {
       type: DataTypes.UUID,
       allowNull: false,
       primaryKey: true,
@@ -9,4 +9,4 @@ const createUuid = () => {
     }
   }
 }
-export default createUuid
+export default createId

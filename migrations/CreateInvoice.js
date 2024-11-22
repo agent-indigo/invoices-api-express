@@ -1,16 +1,17 @@
-import migrateUuid from '../utilities/migrateUuid.js'
+import {DataTypes} from 'sequelize'
+import createId from '../utilities/createId.js'
 export const up = async (
   queryInterface,
   Sequelize
 ) => await queryInterface.createTable(
   'invoices', {
-    ...migrateUuid(Sequelize),
+    ...createId(),
     vendor: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     subtotal: {
-      type: Sequelize.DECIMAL(
+      type: DataTypes.DECIMAL(
         7,
         2
       ),
@@ -18,7 +19,7 @@ export const up = async (
       defaultValue: 0.0
     },
     hst: {
-      type: Sequelize.DECIMAL(
+      type: DataTypes.DECIMAL(
         6,
         2
       ),
@@ -26,7 +27,7 @@ export const up = async (
       defaultValue: 0.0
     },
     total: {
-      type: Sequelize.DECIMAL(
+      type: DataTypes.DECIMAL(
         7,
         2
       ),
@@ -34,17 +35,17 @@ export const up = async (
       defaultValue: 0.0
     },
     invoiceId: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       unique: true
     },
     date: {
-      type: Sequelize.DATE,
+      type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: Sequelize.NOW
+      defaultValue: DataTypes.NOW
     },
-    createdAt: Sequelize.DATE,
-    updatedAt: Sequelize.DATE
+    createdAt: DataTypes.DATE,
+    updatedAt: DataTypes.DATE
   }
 )
 export const down = async (
