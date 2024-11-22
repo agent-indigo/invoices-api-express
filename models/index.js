@@ -1,6 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-import Sequelize from 'sequelize'
+import {Sequelize} from 'sequelize'
 import sequelize from '../utilities/sequelize.js'
 const db = {
   Sequelize,
