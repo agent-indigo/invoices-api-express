@@ -43,6 +43,7 @@ const invoiceModel = sequelize.models.Invoice ?? sequelize.define(
       defaultValue: DataTypes.NOW
     }
   }, {
+    tableName: 'invoices',
     timestamps: true
   }
 )
