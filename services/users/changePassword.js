@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import catchRequestErrors from '../../middleware/catchRequestErrors.js'
-import UserModel from '../../models/UserModel.js'
+import userSqlModel from '../../models/userSqlModel.js'
 /**
  * @name    changePassword
  * @desc    Change the current user's password
@@ -17,7 +17,7 @@ const changePassword = catchRequestErrors(async (
     newPassword,
     confirmNewPassword
   } = request.body
-  const user = await UserModel.findByPk(jwt.verify(
+  const user = await userSqlModel.findByPk(jwt.verify(
     request.cookies.token || request.header('Authorization')?.substring(7),
     process.env.JWT_SECRET
   ).id)

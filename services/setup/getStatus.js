@@ -1,5 +1,5 @@
 import catchRequestErrors from '../../middleware/catchRequestErrors.js'
-import UserModel from '../../models/UserModel.js'
+import userSqlModel from '../../models/userSqlModel.js'
 /**
  * @name    getStatus
  * @desc    Get the setup status (Does the root user exist?)
@@ -12,7 +12,7 @@ const getStatus = catchRequestErrors(async (
 ) => response
 .status(200)
 .json({
-  rootExists: await UserModel.findOne({
+  rootExists: await userSqlModel.findOne({
     where: {
       role: 'root'
     }

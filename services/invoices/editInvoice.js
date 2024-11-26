@@ -1,5 +1,5 @@
 import catchRequestErrors from '../../middleware/catchRequestErrors.js'
-import InvoiceModel from '../../models/InvoiceModel.js'
+import invoiceSqlModel from '../../models/invoiceSqlModel.js'
 /**
  * @name    editInvoice
  * @desc    Edit a Invoice
@@ -10,7 +10,7 @@ const editinvoice = catchRequestErrors(async (
   request,
   response
 ) => {
-  const invoice = await InvoiceModel.findByPk(request.params.id)
+  const invoice = await invoiceSqlModel.findByPk(request.params.id)
   if (!invoice) {
     response.status(404)
     throw new Error('Invoice not found.')

@@ -4,36 +4,44 @@ export const up = async (
   queryInterface,
   Sequelize
 ) => {
-  await queryInterface.createTable('users', {
-    ...createId(),
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-      validate: {
-        notContains: {
-          args: [
-            ' '
-          ],
-          msg: 'Spaces prohibited.'
+  await queryInterface.createTable(
+    'users', {
+      ...createId(),
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+        validate: {
+          notContains: {
+            args: [
+              ' '
+            ],
+            msg: 'Spaces prohibited.'
+          }
         }
+      },
+      shadow: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      role: {
+        type: DataTypes.ENUM(
+          'root',
+          'user'
+        ),
+        allowNull: false,
+        defaultValue: 'user'
+      },
+      createdAt: {
+        type: DataTypes.DATE,
+        allowNull: false
+      },
+      updatedAt: {
+        type: DataTypes.DATE,
+        allowNull: false
       }
-    },
-    shadow: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    role: {
-      type: DataTypes.ENUM(
-        'root',
-        'user'
-      ),
-      allowNull: false,
-      defaultValue: 'user'
-    },
-    createdAt: DataTypes.DATE,
-    updatedAt: DataTypes.DATE
-  })
+    }
+  )
   await queryInterface.addConstraint(
     'users', {
       type: 'unique',

@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs'
 import catchRequestErrors from '../../middleware/catchRequestErrors.js'
-import UserModel from '../../models/UserModel.js'
+import userSqlModel from '../../models/userSqlModel.js'
 /**
  * @name    createRoot
  * @desc    Create the root user
@@ -15,7 +15,7 @@ const createRoot = catchRequestErrors(async (
     password,
     confirmPassword
   } = request.body
-  if (await UserModel.findOne({
+  if (await userSqlModel.findOne({
     where: {
       role: 'root'
     }
@@ -30,7 +30,7 @@ const createRoot = catchRequestErrors(async (
       response.status(403)
       throw new Error('At least one field is empty')
     } else {
-      await UserModel.create({
+      await userSqlModel.create({
         name: 'root',
         shadow: await bcrypt.hash(
           password,

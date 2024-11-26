@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 import catchRequestErrors from './catchRequestErrors.js'
-import UserModel from '../models/UserModel.js'
+import userSqlModel from '../models/userSqlModel.js'
 const authenticate = catchRequestErrors(async (
   request,
   response,
@@ -8,7 +8,7 @@ const authenticate = catchRequestErrors(async (
 ) => {
   const token = request.cookies.token ?? request.header('Authorization')?.substring(7)
   if (token) {
-    const user = await UserModel.findByPk(jwt.verify(
+    const user = await userSqlModel.findByPk(jwt.verify(
       token,
       process.env.JWT_SECRET
     ).id)

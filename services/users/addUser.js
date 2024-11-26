@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs'
 import catchRequestErrors from '../../middleware/catchRequestErrors.js'
-import UserModel from '../../models/UserModel.js'
+import userSqlModel from '../../models/userSqlModel.js'
 /**
  * @name    addUser
  * @desc    Add a new user
@@ -23,7 +23,7 @@ const addUser = catchRequestErrors(async (
     response.status(400)
     throw new Error('At least one field is empty.')
   } else {
-    await UserModel.create({
+    await userSqlModel.create({
       name,
       shadow: await bcrypt.hash(
         password,

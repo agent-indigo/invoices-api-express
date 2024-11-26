@@ -12,7 +12,7 @@ for (const file of fs.readdirSync(new URL(
 )).filter(fileName => (
   fileName.indexOf('.') !== 0 &&
   fileName !== path.basename(import.meta.url) &&
-  fileName.slice(-8) === 'Model.js' &&
+  fileName.slice(-11) === 'SqlModel.js' &&
   fileName.indexOf('.test') === -1
 ))) {
   const model = await import(path.join(

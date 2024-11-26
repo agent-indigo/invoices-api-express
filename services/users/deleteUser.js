@@ -1,5 +1,5 @@
 import catchRequestErrors from '../../middleware/catchRequestErrors.js'
-import UserModel from '../../models/UserModel.js'
+import userSqlModel from '../../models/userSqlModel.js'
 /**
  * @name    deleteUser
  * @desc    Delete a user
@@ -10,7 +10,7 @@ const deleteUser = catchRequestErrors(async (
   request,
   response
 ) => {
-  const user = await UserModel.findByPk(request.params.id)
+  const user = await userSqlModel.findByPk(request.params.id)
   if (!user) {
     response.status(404)
     throw new Error('User not found.')

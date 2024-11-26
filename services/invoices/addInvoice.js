@@ -1,5 +1,5 @@
 import catchRequestErrors from '../../middleware/catchRequestErrors.js'
-import InvoiceModel from '../../models/InvoiceModel.js'
+import invoiceSqlModel from '../../models/invoiceSqlModel.js'
 /**
  * @name    addInvoice
  * @desc    Add a invoice
@@ -16,6 +16,6 @@ const addInvoice = catchRequestErrors(async (
       throw new Error(`Field "${key}" is empty.`)
     }
   }
-  response.status(201).json(await InvoiceModel.create(request.body))
+  response.status(201).json(await invoiceSqlModel.create(request.body))
 })
 export default addInvoice

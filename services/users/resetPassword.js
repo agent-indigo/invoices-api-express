@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import catchRequestErrors from '../../middleware/catchRequestErrors.js'
-import UserModel from '../../models/UserModel.js'
+import userSqlModel from '../../models/userSqlModel.js'
 /**
  * @name    resetPassword
  * @desc    Reset a user's password
@@ -17,12 +17,12 @@ const resetPassword = catchRequestErrors(async (
     newPassword,
     confirmNewPassword
   } = request.body
-  const user = await UserModel.findByPk(id)
+  const user = await userSqlModel.findByPk(id)
   if (!user) {
     response.status(404)
     throw new Error('User not found.')
   } else {
-    if (await UserModel.findByPk(jwt.verify(
+    if (await userSqlModel.findByPk(jwt.verify(
       request.cookies.token || request.header('Authorization')?.substring(7),
       process.env.JWT_SECRET
     ).id).id === user.id) {

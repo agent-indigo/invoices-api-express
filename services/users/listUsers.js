@@ -1,5 +1,5 @@
 import catchRequestErrors from '../../middleware/catchRequestErrors.js'
-import UserModel from '../../models/UserModel.js'
+import userSqlModel from '../../models/userSqlModel.js'
 /**
  * @name    listUsers
  * @desc    List all users
@@ -9,7 +9,7 @@ import UserModel from '../../models/UserModel.js'
 const listUsers = catchRequestErrors(async (
   request,
   response
-) => response.status(200).json(await UserModel.findAll({
+) => response.status(200).json(await userSqlModel.findAll({
   attributes: {
     exclude: [
       'shadow'

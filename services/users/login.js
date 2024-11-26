@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs'
 import catchRequestErrors from '../../middleware/catchRequestErrors.js'
 import createToken from '../../utilities/createToken.js'
-import UserModel from '../../models/UserModel.js'
+import userSqlModel from '../../models/userSqlModel.js'
 /**
  * @name    login
  * @desc    Log in a user
@@ -16,7 +16,7 @@ const login = catchRequestErrors(async (
     name,
     password
   } = request.body
-  const user = await UserModel.findOne({
+  const user = await userSqlModel.findOne({
     where: {
       name
     }

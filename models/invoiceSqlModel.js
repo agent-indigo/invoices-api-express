@@ -1,10 +1,8 @@
 import {DataTypes} from 'sequelize'
 import createId from '../utilities/createId.js'
-export const up = async (
-  queryInterface,
-  Sequelize
-) => await queryInterface.createTable(
-  'invoices', {
+import sequelize from '../utilities/sequelize.js'
+const invoiceModel = sequelize.models.Invoice ?? sequelize.define(
+  'Invoice', {
     ...createId(),
     vendor: {
       type: DataTypes.STRING,
@@ -43,18 +41,9 @@ export const up = async (
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: DataTypes.NOW
-    },
-    createdAt: {
-      type: DataTypes.DATE,
-      allowNull: false
-    },
-    updatedAt: {
-      type: DataTypes.DATE,
-      allowNull: false
     }
+  }, {
+    timestamps: true
   }
 )
-export const down = async (
-  queryInterface,
-  Sequelize
-) => await queryInterface.dropTable('invoices')
+export default invoiceModel
