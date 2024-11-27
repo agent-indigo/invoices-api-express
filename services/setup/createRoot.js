@@ -15,33 +15,24 @@ const createRoot = catchRequestErrors(async (
     password,
     confirmPassword
   } = request.body
-  if (await userSqlModel.findOne({
-    where: {
-      role: 'root'
-    }
-  })) {
+  if (password !== confirmPassword) {
     response.status(403)
-    throw new Error('Root user already exists.')
+    throw new Error('Passwords do not match.')
+  } else if (!password || !confirmPassword) {
+    response.status(403)
+    throw new Error('At least one field is empty.')
   } else {
-    if (password !== confirmPassword) {
-      response.status(403)
-      throw new Error('Passwords do not match')
-    } else if (!password || !confirmPassword) {
-      response.status(403)
-      throw new Error('At least one field is empty')
-    } else {
-      await userSqlModel.create({
-        name: 'root',
-        shadow: await bcrypt.hash(
-          password,
-          10
-        ),
-        role: 'root'
-      })
-      response.status(201).json({
-        message: 'User "root" created.'
-      })
-    }
+    await userSqlModel.create({
+      name: 'root',
+      shadow: await bcrypt.hash(
+        password,
+        10
+      ),
+      role: 'root'
+    })
+    response.status(201).json({
+      message: 'User "root" created.'
+    })
   }
 })
 export default createRoot

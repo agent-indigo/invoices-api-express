@@ -26,7 +26,8 @@ export const up = async queryInterface => await queryInterface.createTable(
         'user'
       ),
       allowNull: false,
-      defaultValue: 'user'
+      defaultValue: 'user',
+      unique: 'root'
     },
     createdAt: {
       type: DataTypes.DATE,

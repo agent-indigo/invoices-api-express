@@ -27,7 +27,8 @@ const userModel = sequelize.models.User ?? sequelize.define(
         'user'
       ),
       allowNull: false,
-      defaultValue: 'user'
+      defaultValue: 'user',
+      unique: 'root'
     }
   }, {
     tableName: 'users',
