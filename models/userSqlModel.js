@@ -32,7 +32,12 @@ const userModel = sequelize.models.User ?? sequelize.define(
     }
   }, {
     tableName: 'users',
-    timestamps: true
+    timestamps: true,
+    hooks: {
+      beforeDestroy: async user => {
+        if (user.get('role') === 'root') throw new Error('The root user shouldn\'t be deleted.')
+      }
+    }
   }
 )
 export default  userModel

@@ -14,9 +14,6 @@ const deleteUser = catchRequestErrors(async (
   if (!user) {
     response.status(404)
     throw new Error('User not found.')
-  } else if (user.role === 'root') {
-    response.status(403)
-    throw new Error('The root user shouldn\'t be deleted.')
   } else {
     await user.destroy()
     response.status(204).json({
