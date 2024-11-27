@@ -1,9 +1,6 @@
 import {DataTypes} from 'sequelize'
 import createId from '../utilities/createId.js'
-export const up = async (
-  queryInterface,
-  Sequelize
-) => await queryInterface.createTable(
+export const up = async queryInterface => await queryInterface.createTable(
   'invoices', {
     ...createId(),
     vendor: {
@@ -54,7 +51,4 @@ export const up = async (
     }
   }
 )
-export const down = async (
-  queryInterface,
-  Sequelize
-) => await queryInterface.dropTable('invoices')
+export const down = async queryInterface => await queryInterface.dropTable('invoices')
