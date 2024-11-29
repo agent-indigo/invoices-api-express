@@ -1,5 +1,6 @@
 import {DataTypes} from 'sequelize'
 import createId from '../utilities/createId.js'
+import createTimeStamps from '../utilities/createTimeStamps.js'
 export const up = async queryInterface => await queryInterface.createTable(
   'invoices', {
     ...createId(),
@@ -41,14 +42,7 @@ export const up = async queryInterface => await queryInterface.createTable(
       allowNull: false,
       defaultValue: DataTypes.NOW
     },
-    createdAt: {
-      type: DataTypes.DATE,
-      allowNull: false
-    },
-    updatedAt: {
-      type: DataTypes.DATE,
-      allowNull: true
-    }
+    ...createTimeStamps()
   }
 )
 export const down = async queryInterface => await queryInterface.dropTable('invoices')
