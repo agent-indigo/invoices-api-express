@@ -34,7 +34,7 @@ export const up = async queryInterface => await queryInterface.createTable(
     },
     updatedAt: {
       type: DataTypes.DATE,
-      allowNull: false
+      allowNull: true
     }
   }
 )
