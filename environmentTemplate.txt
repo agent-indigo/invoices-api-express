@@ -1,7 +1,7 @@
 DOMAIN = localhost
-DB_NAME = invoices
-DB_USER = postgres
-DB_PW = 
-DB_HOST = localhost
-DB_PORT = 5432
+SQL_DB_NAME = invoices
+SQL_DB_USER = postgres
+SQL_DB_PW = 
+SQL_DB_HOST = localhost
+SQL_DB_PORT = 5432
 JWT_SECRET = 
