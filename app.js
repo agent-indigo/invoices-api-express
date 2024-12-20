@@ -18,8 +18,7 @@ import connectSequelize from './utilities/connectSequelize.js'
 import invoicesRouter from './routers/invoicesRouter.js'
 import usersRouter from './routers/usersRouter.js'
 import setupRouter from './routers/setupRouter.js'
-const app = express()
-app.use(
+const app = express().use(
   express.json(),
   express.urlencoded({
     extended: true
@@ -32,35 +31,34 @@ app.use(
   rateLimit({
     windowMs: 10 * 60 * 1000,
     max: 100
-  }),
-  morgan(
-    ':url,:method,:status,:response-time,:date[web]', {
-      stream: createWriteStream(
-        join(
-          dirname(fileURLToPath(import.meta.url)),
-          'log.csv'
-        ), {
-          flags: 'a'
-        }
-      )
-    }
-  )
-)
-app.use(
+  })
+).use(
   '/users',
   usersRouter
-)
-app.use(
+).use(
   '/invoices',
   invoicesRouter
-)
-app.use(
+).use(
   '/setup',
   setupRouter
+).use(
+  send404responses,
+  sendErrorResponses
 )
-app.use(send404responses)
-app.use(sendErrorResponses)
-connectSequelize().then(() => app.listen(
+process.env.NODE_ENV === 'development' && app.use(morgan(
+  ':url,:method,:status,:response-time,:date[web]', {
+    stream: createWriteStream(
+      join(
+        dirname(fileURLToPath(import.meta.url)),
+        'log.csv'
+      ), {
+        flags: 'a'
+      }
+    )
+  }
+))
+await connectSequelize()
+app.listen(
   8080,
   () => console.log(`Listening on http${
     process.env.NODE_ENV === 'production' ? 's' : ''
@@ -69,4 +67,4 @@ connectSequelize().then(() => app.listen(
   }:8080 in ${
     process.env.NODE_ENV
   } mode.`)
-))
+)
