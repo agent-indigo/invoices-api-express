@@ -5,14 +5,26 @@ import editinvoice from '../services/invoices/editInvoice.js'
 import listInvoices from '../services/invoices/listInvoices.js'
 import authenticate from '../middleware/authenticate.js'
 import authorize from '../middleware/authorize.js'
-const invoicesRouter = Router().use(authenticate).use(authorize(
+const invoicesRouter = Router()
+invoicesRouter.use(authenticate)
+invoicesRouter.use(authorize(
   'user',
   'root'
 ))
-.route('/')
-.get(listInvoices)
-.post(addInvoice)
-.route('/:id')
-.put(editinvoice)
-.delete(deleteInvoice)
+invoicesRouter.get(
+  '/',
+  listInvoices
+)
+invoicesRouter.post(
+  '/',
+  addInvoice
+)
+invoicesRouter.patch(
+  '/:id',
+  editinvoice
+)
+invoicesRouter.delete(
+  '/:id',
+  deleteInvoice
+)
 export default invoicesRouter

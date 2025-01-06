@@ -8,25 +8,38 @@ import logout from '../services/users/logout.js'
 import resetPassword from '../services/users/resetPassword.js'
 import authenticate from '../middleware/authenticate.js'
 import authorize from '../middleware/authorize.js'
-const usersRouter = Router().post(
+const usersRouter = Router()
+usersRouter.post(
   '/login',
   login
-).use(authenticate).use(authorize(
+)
+usersRouter.use(authenticate)
+usersRouter.use(authorize(
   'user',
   'root'
-)).get(
+))
+usersRouter.get(
   '/logout',
   logout
-).patch(
+)
+usersRouter.patch(
   '/changePassword',
   changePassword
-).use(authorize('root'))
-.route('/')
-.get(listUsers)
-.post(addUser).delete(
+)
+usersRouter.use(authorize('root'))
+usersRouter.get(
+  '/',
+  listUsers
+)
+usersRouter.post(
+  '/',
+  addUser
+)
+usersRouter.delete(
   '/:id',
   deleteUser
-).patch(
+)
+usersRouter.patch(
   '/resetPassword/:id',
   resetPassword
 )
