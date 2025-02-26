@@ -16,10 +16,10 @@ const createRoot = catchRequestErrors(async (
     confirmPassword
   } = request.body
   if (password !== confirmPassword) {
-    response.status(403)
+    response.status(400)
     throw new Error('Passwords do not match.')
   } else if (!password || !confirmPassword) {
-    response.status(403)
+    response.status(400)
     throw new Error('At least one field is empty.')
   } else {
     await userSqlModel.create({

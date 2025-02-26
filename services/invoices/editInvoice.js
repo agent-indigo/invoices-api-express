@@ -15,12 +15,6 @@ const editinvoice = catchRequestErrors(async (
     response.status(404)
     throw new Error('Invoice not found.')
   } else {
-    for (const key in request.body) {
-      if (!request.body[key]) {
-        response.status(400)
-        throw new Error(`Field "${key}" is empty.`)
-      }
-    }
     await invoice.update(request.body)
     response.status(200).json(invoice)
   }

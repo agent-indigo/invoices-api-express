@@ -43,7 +43,7 @@ const changePassword = catchRequestErrors(async (
         10
       )
       await user.save()
-      response.status(202).json({
+      response.status(200).json({
         message: 'Password changed.'
       })
     }

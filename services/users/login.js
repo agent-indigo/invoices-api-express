@@ -35,7 +35,7 @@ const login = catchRequestErrors(async (
       response.status(401)
       throw new Error('Incorrect password.')
     } else {
-      response.status(202).json({
+      response.status(200).json({
         name: user.name,
         role: user.role,
         token: createToken(

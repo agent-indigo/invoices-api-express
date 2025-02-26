@@ -26,7 +26,7 @@ const resetPassword = catchRequestErrors(async (
       request.cookies.token || request.header('Authorization')?.substring(7),
       process.env.JWT_SECRET
     ).id).id === user.id) {
-      response.status(403)
+      response.status(401)
       throw new Error('You can\'t change your own password this way.')
     } else if (!newPassword || !confirmNewPassword) {
       response.status(400)
@@ -40,7 +40,7 @@ const resetPassword = catchRequestErrors(async (
         10
       )
       await user.save()
-      response.status(202).json({
+      response.status(200).json({
         message: 'Password reset.'
       })
     }
