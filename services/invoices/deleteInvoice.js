@@ -16,9 +16,7 @@ const deleteInvoice = catchRequestErrors(async (
     throw new Error('Invoice not found.')
   } else {
     await invoice.destroy()
-    response.status(204).json({
-      message: 'Invoice deleted.'
-    })
+    response.status(204)
   }
 })
 export default deleteInvoice

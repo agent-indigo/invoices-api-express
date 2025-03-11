@@ -15,7 +15,7 @@ const addUser = catchRequestErrors(async (
     name,
     password,
     confirmPassword
-  } = request.body
+  } = await request.json()
   if (password !== confirmPassword) {
     response.status(400)
     throw new Error('Passwords do not match.')
@@ -32,7 +32,7 @@ const addUser = catchRequestErrors(async (
       role: 'user'
     })
     response.status(201).json({
-      message: 'User created.'
+      message: `User created.`
     })
   }
 })

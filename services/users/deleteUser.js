@@ -16,9 +16,7 @@ const deleteUser = catchRequestErrors(async (
     throw new Error('User not found.')
   } else {
     await user.destroy()
-    response.status(204).json({
-      message: 'User deleted.'
-    })
+    response.status(204)
   }
 })
 export default deleteUser

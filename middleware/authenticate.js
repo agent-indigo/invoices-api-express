@@ -13,7 +13,7 @@ const authenticate = catchRequestErrors(async (
       process.env.JWT_SECRET
     ).id)
     if (user) {
-      request.id = user.id
+      request.id = user.get('id')
       next()
     } else {
       response.status(401)

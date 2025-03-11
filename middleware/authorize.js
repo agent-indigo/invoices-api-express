@@ -5,7 +5,7 @@ const authorize = (...roles) => catchRequestErrors(async (
   response,
   next
 ) => {
-  if (roles.includes((await userSqlModel.findByPk(request.id)).role)) {
+  if (roles.includes((await userSqlModel.findByPk(request.id)).get('role'))) {
     next()
   } else {
     response.status(401)

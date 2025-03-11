@@ -9,9 +9,7 @@ import userSqlModel from '../../models/userSqlModel.js'
 const getStatus = catchRequestErrors(async (
   request,
   response
-) => response
-.status(200)
-.json({
+) => response.status(200).json({
   rootExists: await userSqlModel.findOne({
     where: {
       role: 'root'

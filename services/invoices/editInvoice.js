@@ -15,7 +15,7 @@ const editinvoice = catchRequestErrors(async (
     response.status(404)
     throw new Error('Invoice not found.')
   } else {
-    await invoice.update(request.body)
+    await invoice.update(await request.json())
     response.status(200).json(invoice)
   }
 })

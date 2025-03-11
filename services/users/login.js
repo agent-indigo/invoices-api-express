@@ -15,7 +15,7 @@ const login = catchRequestErrors(async (
   const {
     name,
     password
-  } = request.body
+  } = await request.json()
   const user = await userSqlModel.findOne({
     where: {
       name
@@ -28,19 +28,19 @@ const login = catchRequestErrors(async (
     response.status(404)
     throw new Error('User not found.')
   } else {
-    if (!await bcrypt.compare(
+    if (!bcrypt.compare(
       password,
-      user.shadow
+      user.get('shadow')
     )) {
       response.status(401)
       throw new Error('Incorrect password.')
     } else {
       response.status(200).json({
-        name: user.name,
-        role: user.role,
+        name: user.get('name'),
+        role: user.get('role'),
         token: createToken(
           response,
-          user.id
+          user.get('id')
         )
       })
     }

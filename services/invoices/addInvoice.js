@@ -10,12 +10,13 @@ const addInvoice = catchRequestErrors(async (
   request,
   response
 ) => {
-  for (const key in request.body) {
-    if (!request.body[key]) {
+  const invoice = await request.json()
+  for (const key in invoice) {
+    if (!invoice[key]) {
       response.status(400)
       throw new Error(`Field "${key}" is empty.`)
     }
   }
-  response.status(201).json(await invoiceSqlModel.create(request.body))
+  response.status(201).json(await invoiceSqlModel.create(invoice))
 })
 export default addInvoice

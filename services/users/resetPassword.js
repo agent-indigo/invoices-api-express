@@ -16,7 +16,7 @@ const resetPassword = catchRequestErrors(async (
     id,
     newPassword,
     confirmNewPassword
-  } = request.body
+  } = await request.json()
   const user = await userSqlModel.findByPk(id)
   if (!user) {
     response.status(404)
@@ -25,7 +25,7 @@ const resetPassword = catchRequestErrors(async (
     if (await userSqlModel.findByPk(jwt.verify(
       request.cookies.token || request.header('Authorization')?.substring(7),
       process.env.JWT_SECRET
-    ).id).id === user.id) {
+    ).id).get('id') === user.get('id')) {
       response.status(401)
       throw new Error('You can\'t change your own password this way.')
     } else if (!newPassword || !confirmNewPassword) {
@@ -35,9 +35,12 @@ const resetPassword = catchRequestErrors(async (
       response.status(400)
       throw new Error('New passwords do not match.')
     } else {
-      user.shadow = await bcrypt.hash(
-        newPassword,
-        10
+      user.set(
+        'shadow',
+        await bcrypt.hash(
+          newPassword,
+          10
+        )
       )
       await user.save()
       response.status(200).json({

@@ -14,7 +14,7 @@ const createRoot = catchRequestErrors(async (
   const {
     password,
     confirmPassword
-  } = request.body
+  } = await request.json()
   if (password !== confirmPassword) {
     response.status(400)
     throw new Error('Passwords do not match.')
