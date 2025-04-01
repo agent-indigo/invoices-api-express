@@ -1,12 +1,12 @@
-import catchRequestErrors from '../../middleware/catchRequestErrors.js'
-import userSqlModel from '../../models/userSqlModel.js'
+import catchRequestErrors from '../middleware/catchRequestErrors.js'
+import userSqlModel from '../models/userSqlModel.js'
 /**
- * @name    getStatus
+ * @name    getConfigStatus
  * @desc    Get the setup status (Does the root user exist?)
  * @route   GET /api/setup/status
  * @access  public
  */
-const getStatus = catchRequestErrors(async (
+const getConfigStatus = catchRequestErrors(async (
   request,
   response
 ) => response.status(200).json({
@@ -16,4 +16,4 @@ const getStatus = catchRequestErrors(async (
     }
   }) !== null
 }))
-export default getStatus
+export default getConfigStatus

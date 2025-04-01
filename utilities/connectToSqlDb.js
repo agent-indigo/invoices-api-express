@@ -1,5 +1,5 @@
 import sequelize from './sequelize.js'
-const connectSequelize = async () => {
+const connectToSqlDb = async () => {
   let connected = false
   if (!connected) try {
     await sequelize.authenticate()
@@ -12,4 +12,4 @@ const connectSequelize = async () => {
     process.exit(1)
   }
 }
-export default connectSequelize
+export default connectToSqlDb

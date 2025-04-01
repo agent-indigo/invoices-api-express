@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs'
-import catchRequestErrors from '../../middleware/catchRequestErrors.js'
-import createToken from '../../utilities/createToken.js'
-import userSqlModel from '../../models/userSqlModel.js'
+import catchRequestErrors from '../middleware/catchRequestErrors.js'
+import createToken from '../utilities/createToken.js'
+import userSqlModel from '../models/userSqlModel.js'
 /**
  * @name    login
  * @desc    Log in a user

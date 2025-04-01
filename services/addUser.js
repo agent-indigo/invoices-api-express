@@ -1,38 +1,39 @@
 import bcrypt from 'bcryptjs'
-import catchRequestErrors from '../../middleware/catchRequestErrors.js'
-import userSqlModel from '../../models/userSqlModel.js'
+import catchRequestErrors from '../middleware/catchRequestErrors.js'
+import userSqlModel from '../models/userSqlModel.js'
 /**
- * @name    createRoot
- * @desc    Create the root user
- * @route   POST /api/setup/root
- * @access  public
+ * @name    addUser
+ * @desc    Add a new user
+ * @route   POST /api/users
+ * @access  private/root
  */
-const createRoot = catchRequestErrors(async (
+const addUser = catchRequestErrors(async (
   request,
   response
 ) => {
   const {
+    name,
     password,
     confirmPassword
   } = await request.json()
   if (password !== confirmPassword) {
     response.status(400)
     throw new Error('Passwords do not match.')
-  } else if (!password || !confirmPassword) {
+  } else if (!name || !password || !confirmPassword) {
     response.status(400)
     throw new Error('At least one field is empty.')
   } else {
     await userSqlModel.create({
-      name: 'root',
+      name,
       shadow: await bcrypt.hash(
         password,
         10
       ),
-      role: 'root'
+      role: 'user'
     })
     response.status(201).json({
-      message: 'User "root" created.'
+      message: `User created.`
     })
   }
 })
-export default createRoot
+export default addUser

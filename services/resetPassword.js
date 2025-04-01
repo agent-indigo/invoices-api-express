@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
-import catchRequestErrors from '../../middleware/catchRequestErrors.js'
-import userSqlModel from '../../models/userSqlModel.js'
+import catchRequestErrors from '../middleware/catchRequestErrors.js'
+import userSqlModel from '../models/userSqlModel.js'
 /**
  * @name    resetPassword
  * @desc    Reset a user's password

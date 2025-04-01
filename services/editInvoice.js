@@ -1,5 +1,5 @@
-import catchRequestErrors from '../../middleware/catchRequestErrors.js'
-import invoiceSqlModel from '../../models/invoiceSqlModel.js'
+import catchRequestErrors from '../middleware/catchRequestErrors.js'
+import invoiceSqlModel from '../models/invoiceSqlModel.js'
 /**
  * @name    editInvoice
  * @desc    Edit a Invoice

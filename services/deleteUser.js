@@ -1,5 +1,5 @@
-import catchRequestErrors from '../../middleware/catchRequestErrors.js'
-import userSqlModel from '../../models/userSqlModel.js'
+import catchRequestErrors from '../middleware/catchRequestErrors.js'
+import userSqlModel from '../models/userSqlModel.js'
 /**
  * @name    deleteUser
  * @desc    Delete a user

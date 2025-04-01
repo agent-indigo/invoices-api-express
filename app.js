@@ -14,10 +14,10 @@ import cors from 'cors'
 import rateLimit from 'express-rate-limit'
 import send404responses from './middleware/send404responses.js'
 import sendErrorResponses from './middleware/sendErrorResponses.js'
-import connectSequelize from './utilities/connectSequelize.js'
+import connectToSqlDb from './utilities/connectToSqlDb.js'
 import invoicesRouter from './routers/invoicesRouter.js'
 import usersRouter from './routers/usersRouter.js'
-import setupRouter from './routers/setupRouter.js'
+import configRouter from './routers/configRouter.js'
 const app = express().use(
   express.json(),
   express.urlencoded({
@@ -39,8 +39,8 @@ const app = express().use(
   '/invoices',
   invoicesRouter
 ).use(
-  '/setup',
-  setupRouter
+  '/config',
+  configRouter
 ).use(
   send404responses,
   sendErrorResponses
@@ -57,7 +57,7 @@ process.env.NODE_ENV === 'development' && app.use(morgan(
     )
   }
 ))
-await connectSequelize()
+await connectToSqlDb()
 app.listen(
   8080,
   () => console.log(`Listening on http${
