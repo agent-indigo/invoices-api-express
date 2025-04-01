@@ -1,7 +1,7 @@
 /**
  * @name    logout
  * @desc    Log out the current user
- * @route   GET /api/users/logout
+ * @route   GET /users/logout
  * @access  private
  */
 const logout = (

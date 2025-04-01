@@ -3,7 +3,7 @@ import userSqlModel from '../models/userSqlModel.js'
 /**
  * @name    getConfigStatus
  * @desc    Get the setup status (Does the root user exist?)
- * @route   GET /api/setup/status
+ * @route   GET /config/status
  * @access  public
  */
 const getConfigStatus = catchRequestErrors(async (

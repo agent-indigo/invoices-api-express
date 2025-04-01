@@ -3,7 +3,7 @@ import userSqlModel from '../models/userSqlModel.js'
 /**
  * @name    deleteUser
  * @desc    Delete a user
- * @route   DELETE /api/users/:id
+ * @route   DELETE /users/:id
  * @access  private/root
  */
 const deleteUser = catchRequestErrors(async (

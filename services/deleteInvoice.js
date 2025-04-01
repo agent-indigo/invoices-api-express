@@ -3,7 +3,7 @@ import invoiceSqlModel from '../models/invoiceSqlModel.js'
 /**
  * @name    deleteInvoice
  * @desc    Delete a invoice
- * @route   DELETE /api/invoices/:id
+ * @route   DELETE /invoices/:id
  * @access  private
  */
 const deleteInvoice = catchRequestErrors(async (

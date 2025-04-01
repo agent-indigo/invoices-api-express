@@ -3,7 +3,7 @@ import userSqlModel from '../models/userSqlModel.js'
 /**
  * @name    listUsers
  * @desc    List all users
- * @route   GET /api/users
+ * @route   GET /users
  * @access  private/root
  */
 const listUsers = catchRequestErrors(async (

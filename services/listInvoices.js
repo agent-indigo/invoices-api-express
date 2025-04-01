@@ -3,7 +3,7 @@ import invoiceSqlModel from '../models/invoiceSqlModel.js'
 /**
  * @name    listInvoices
  * @desc    List all invoices
- * @route   GET /api/invoices
+ * @route   GET /invoices
  * @access  private
  */
 const listInvoices = catchRequestErrors(async (

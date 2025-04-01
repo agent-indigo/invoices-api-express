@@ -5,7 +5,7 @@ import userSqlModel from '../models/userSqlModel.js'
 /**
  * @name    changePassword
  * @desc    Change the current user's password
- * @route   PATCH /api/users/changePassword
+ * @route   PATCH /users/changePassword
  * @access  private
  */
 const changePassword = catchRequestErrors(async (

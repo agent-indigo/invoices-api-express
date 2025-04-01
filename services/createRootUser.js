@@ -4,7 +4,7 @@ import userSqlModel from '../models/userSqlModel.js'
 /**
  * @name    createRootUser
  * @desc    Create the root user
- * @route   POST /api/setup/root
+ * @route   POST /config/root
  * @access  public
  */
 const createRootUser = catchRequestErrors(async (

@@ -5,7 +5,7 @@ import userSqlModel from '../models/userSqlModel.js'
 /**
  * @name    login
  * @desc    Log in a user
- * @route   POST /api/users/login
+ * @route   POST /users/login
  * @access  public
  */
 const login = catchRequestErrors(async (

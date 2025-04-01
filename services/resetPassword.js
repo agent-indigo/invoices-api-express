@@ -5,7 +5,7 @@ import userSqlModel from '../models/userSqlModel.js'
 /**
  * @name    resetPassword
  * @desc    Reset a user's password
- * @route   PATCH /api/users/resetPassword/:id
+ * @route   PATCH /users/resetPassword/:id
  * @access  private/root
  */
 const resetPassword = catchRequestErrors(async (

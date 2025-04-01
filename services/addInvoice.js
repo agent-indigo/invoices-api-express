@@ -3,7 +3,7 @@ import invoiceSqlModel from '../models/invoiceSqlModel.js'
 /**
  * @name    addInvoice
  * @desc    Add a invoice
- * @route   POST /api/invoices
+ * @route   POST /invoices
  * @access  private
  */
 const addInvoice = catchRequestErrors(async (

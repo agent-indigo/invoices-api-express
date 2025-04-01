@@ -3,7 +3,7 @@ import invoiceSqlModel from '../models/invoiceSqlModel.js'
 /**
  * @name    editInvoice
  * @desc    Edit a Invoice
- * @route   PUT /api/invoices/:id
+ * @route   PATCH /invoices/:id
  * @access  private
  */
 const editinvoice = catchRequestErrors(async (

@@ -4,7 +4,7 @@ import userSqlModel from '../models/userSqlModel.js'
 /**
  * @name    addUser
  * @desc    Add a new user
- * @route   POST /api/users
+ * @route   POST /users
  * @access  private/root
  */
 const addUser = catchRequestErrors(async (
