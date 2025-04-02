@@ -18,33 +18,19 @@ import connectToSqlDb from './utilities/connectToSqlDb.js'
 import invoicesRouter from './routers/invoicesRouter.js'
 import usersRouter from './routers/usersRouter.js'
 import configRouter from './routers/configRouter.js'
-const app = express().use(
-  express.json(),
-  express.urlencoded({
-    extended: true
-  }),
-  cookieParser(),
-  cors(),
-  helmet(),
-  helmet.xssFilter(),
-  hpp(),
-  rateLimit({
-    windowMs: 10 * 60 * 1000,
-    max: 100
-  })
-).use(
-  '/users',
-  usersRouter
-).use(
-  '/invoices',
-  invoicesRouter
-).use(
-  '/config',
-  configRouter
-).use(
-  send404responses,
-  sendErrorResponses
-)
+const app = express()
+app.use(express.json())
+app.use(express.urlencoded({
+  extended: true
+}))
+app.use(cookieParser())
+app.use(cors())
+app.use(helmet())
+app.use(helmet.xssFilter())
+app.use(hpp())
+app.use(rateLimit({
+  limit: 100
+}))
 process.env.NODE_ENV === 'development' && app.use(morgan(
   ':url,:method,:status,:response-time,:date[web]', {
     stream: createWriteStream(
@@ -57,6 +43,20 @@ process.env.NODE_ENV === 'development' && app.use(morgan(
     )
   }
 ))
+app.use(
+  '/config',
+  configRouter
+)
+app.use(
+  '/invoices',
+  invoicesRouter
+)
+app.use(
+  '/users',
+  usersRouter
+)
+app.use(send404responses)
+app.use(sendErrorResponses)
 await connectToSqlDb()
 app.listen(
   8080,
