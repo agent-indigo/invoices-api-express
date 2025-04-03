@@ -7,7 +7,10 @@ const userSqlModel = sequelize.models.User ?? sequelize.define(
     username: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      unique: [
+        true,
+        'A user with this name already exists.'
+      ],
       validate: {
         notContains: {
           args: [
