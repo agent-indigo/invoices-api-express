@@ -23,12 +23,15 @@ const createRootUser = catchRequestErrors(async (
     throw new Error('At least one field is empty.')
   } else {
     await userSqlModel.create({
-      name: 'root',
-      shadow: await bcrypt.hash(
+      username: 'root',
+      password: await bcrypt.hash(
         password,
-        10
+        12
       ),
-      role: 'root'
+      roles: [
+        'root',
+        'user'
+      ]
     })
     response.status(201).json({
       message: 'User "root" created.'

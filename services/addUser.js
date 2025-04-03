@@ -12,24 +12,23 @@ const addUser = catchRequestErrors(async (
   response
 ) => {
   const {
-    name,
+    username,
     password,
     confirmPassword
   } = await request.json()
   if (password !== confirmPassword) {
     response.status(400)
     throw new Error('Passwords do not match.')
-  } else if (!name || !password || !confirmPassword) {
+  } else if (!username || !password || !confirmPassword) {
     response.status(400)
     throw new Error('At least one field is empty.')
   } else {
     await userSqlModel.create({
-      name,
-      shadow: await bcrypt.hash(
+      username,
+      password: await bcrypt.hash(
         password,
-        10
-      ),
-      role: 'user'
+        12
+      )
     })
     response.status(201).json({
       message: `User created.`

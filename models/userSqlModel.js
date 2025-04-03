@@ -4,7 +4,7 @@ import sequelize from '../utilities/sequelize.js'
 const userSqlModel = sequelize.models.User ?? sequelize.define(
   'User', {
     ...createId(),
-    name: {
+    username: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
@@ -17,17 +17,41 @@ const userSqlModel = sequelize.models.User ?? sequelize.define(
         }
       }
     },
-    shadow: {
+    password: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    role: {
-      type: DataTypes.ENUM(
+    roles: {
+      type: DataTypes.ARRAY(DataTypes.ENUM(
         'root',
         'user'
-      ),
+      )),
       allowNull: false,
-      defaultValue: 'user'
+      defaultValue: ['user']
+    },
+    authorities: {
+      type: DataTypes.BLOB,
+      allowNull: true
+    },
+    account_non_expired: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true
+    },
+    account_non_locked: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true
+    },
+    credentials_non_expired: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true
+    },
+    enabled: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true
     }
   }, {
     tableName: 'users',

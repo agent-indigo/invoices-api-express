@@ -1,8 +1,9 @@
+import {Op} from 'sequelize'
 import catchRequestErrors from '../middleware/catchRequestErrors.js'
 import userSqlModel from '../models/userSqlModel.js'
 /**
  * @name    getConfigStatus
- * @desc    Get the setup status (Does the root user exist?)
+ * @desc    Get the configuration status (Does the root user exist?)
  * @route   GET /config/status
  * @access  public
  */
@@ -12,7 +13,9 @@ const getConfigStatus = catchRequestErrors(async (
 ) => response.status(200).json({
   rootExists: await userSqlModel.findOne({
     where: {
-      role: 'root'
+      roles: {
+        [Op.contains]: ['root']
+      }
     }
   }) !== null
 }))

@@ -13,15 +13,15 @@ const login = catchRequestErrors(async (
   response
 ) => {
   const {
-    name,
+    username,
     password
   } = await request.json()
   const user = await userSqlModel.findOne({
     where: {
-      name
+      username
     }
   })
-  if (!name || !password) {
+  if (!username || !password) {
     response.status(400)
     throw new Error('At least one field is empty.')
   } else if (!user) {
@@ -30,14 +30,14 @@ const login = catchRequestErrors(async (
   } else {
     if (!bcrypt.compare(
       password,
-      user.get('shadow')
+      user.get('password')
     )) {
       response.status(401)
       throw new Error('Incorrect password.')
     } else {
       response.status(200).json({
-        name: user.get('name'),
-        role: user.get('role'),
+        username: user.get('username'),
+        roles: user.get('roles'),
         token: createToken(
           response,
           user.get('id')

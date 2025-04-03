@@ -36,10 +36,10 @@ const resetPassword = catchRequestErrors(async (
       throw new Error('New passwords do not match.')
     } else {
       user.set(
-        'shadow',
+        'password',
         await bcrypt.hash(
           newPassword,
-          10
+          12
         )
       )
       await user.save()

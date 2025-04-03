@@ -4,7 +4,7 @@ import createTimeStamps from '../utilities/createTimeStamps.js'
 export const up = async queryInterface => await queryInterface.createTable(
   'users', {
     ...createId(),
-    name: {
+    username: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
@@ -17,17 +17,41 @@ export const up = async queryInterface => await queryInterface.createTable(
         }
       }
     },
-    shadow: {
+    password: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    role: {
-      type: DataTypes.ENUM(
+    roles: {
+      type: DataTypes.ARRAY(DataTypes.ENUM(
         'root',
         'user'
-      ),
+      )),
       allowNull: false,
-      defaultValue: 'user'
+      defaultValue: ['user']
+    },
+    authorities: {
+      type: DataTypes.BLOB,
+      allowNull: true
+    },
+    account_non_expired: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true
+    },
+    account_non_locked: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true
+    },
+    credentials_non_expired: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true
+    },
+    enabled: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true
     },
     ...createTimeStamps()
   }

@@ -30,7 +30,7 @@ const changePassword = catchRequestErrors(async (
       throw new Error('At least one field is empty.')
     } else if (!bcrypt.compare(
       currentPassword,
-      user.get('shadow')
+      user.get('password')
     )) {
       response.status(401)
       throw new Error('Incorrect password.')
@@ -39,10 +39,10 @@ const changePassword = catchRequestErrors(async (
       throw new Error('New passwords do not match.')
     } else {
       user.set(
-        'shadow',
+        'password',
         await bcrypt.hash(
           newPassword,
-          10
+          12
         )
       )
       await user.save()
