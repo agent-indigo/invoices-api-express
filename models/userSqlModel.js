@@ -33,7 +33,9 @@ const userSqlModel = sequelize.models.User ?? sequelize.define(
         'user'
       )),
       allowNull: false,
-      defaultValue: ['user']
+      defaultValue: [
+        'user'
+      ]
     },
     authorities: {
       type: DataTypes.BLOB,

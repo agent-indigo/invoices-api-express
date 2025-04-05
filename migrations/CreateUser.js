@@ -7,7 +7,10 @@ export const up = async queryInterface => await queryInterface.createTable(
     username: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      unique: [
+        true,
+        'A user with this name already exists.'
+      ],
       validate: {
         notContains: {
           args: [
@@ -27,7 +30,9 @@ export const up = async queryInterface => await queryInterface.createTable(
         'user'
       )),
       allowNull: false,
-      defaultValue: ['user']
+      defaultValue: [
+        'user'
+      ]
     },
     authorities: {
       type: DataTypes.BLOB,

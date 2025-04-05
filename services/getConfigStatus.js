@@ -14,7 +14,11 @@ const getConfigStatus = catchRequestErrors(async (
   rootExists: await userSqlModel.findOne({
     where: {
       roles: {
-        [Op.contains]: ['root']
+        [
+          Op.contains
+        ]: [
+          'root'
+        ]
       }
     }
   }) !== null

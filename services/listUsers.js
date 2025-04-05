@@ -12,7 +12,7 @@ const listUsers = catchRequestErrors(async (
 ) => response.status(200).json(await userSqlModel.findAll({
   attributes: {
     exclude: [
-      'shadow'
+      'password'
     ]
   }
 })))

@@ -14,10 +14,7 @@ usersRouter.post(
   login
 )
 usersRouter.use(authenticate)
-usersRouter.use(authorize(
-  'user',
-  'root'
-))
+usersRouter.use(authorize('user'))
 usersRouter.get(
   '/logout',
   logout
