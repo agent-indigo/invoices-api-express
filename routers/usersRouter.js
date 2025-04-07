@@ -5,6 +5,7 @@ import deleteUser from '../services/deleteUser.js'
 import listUsers from '../services/listUsers.js'
 import login from '../services/login.js'
 import logout from '../services/logout.js'
+import getUser from '../services/getUser.js'
 import resetPassword from '../services/resetPassword.js'
 import authenticate from '../middleware/authenticate.js'
 import authorize from '../middleware/authorize.js'
@@ -31,6 +32,10 @@ usersRouter.get(
 usersRouter.post(
   '/',
   addUser
+)
+usersRouter.get(
+  '/:id',
+  getUser
 )
 usersRouter.delete(
   '/:id',
