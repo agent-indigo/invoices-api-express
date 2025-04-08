@@ -23,7 +23,7 @@ const resetPassword = catchRequestErrors(async (
     throw new Error('User not found.')
   } else {
     if (await userSqlModel.findByPk(jwt.verify(
-      request.cookies.token || request.header('Authorization')?.substring(7),
+      request.cookies.token ?? request.header('Authorization')?.substring(7),
       process.env.JWT_SECRET
     ).id).get('id') === user.get('id')) {
       response.status(401)

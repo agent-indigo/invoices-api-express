@@ -18,7 +18,7 @@ const changePassword = catchRequestErrors(async (
     confirmNewPassword
   } = await request.json()
   const user = await userSqlModel.findByPk(jwt.verify(
-    request.cookies.token || request.header('Authorization')?.substring(7),
+    request.cookies.token ?? request.header('Authorization')?.substring(7),
     process.env.JWT_SECRET
   ).id)
   if (!user) {
