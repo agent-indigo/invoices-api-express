@@ -24,39 +24,13 @@ export const up = async queryInterface => await queryInterface.createTable(
       type: DataTypes.STRING,
       allowNull: false
     },
-    roles: {
-      type: DataTypes.ARRAY(DataTypes.ENUM(
+    role: {
+      type: DataTypes.ENUM(
         'root',
         'user'
-      )),
+      ),
       allowNull: false,
-      defaultValue: [
-        'user'
-      ]
-    },
-    authorities: {
-      type: DataTypes.BLOB,
-      allowNull: true
-    },
-    account_non_expired: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: true
-    },
-    account_non_locked: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: true
-    },
-    credentials_non_expired: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: true
-    },
-    enabled: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: true
+      defaultValue: 'user'
     },
     ...createTimeStamps()
   }

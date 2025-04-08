@@ -38,7 +38,7 @@ const login = catchRequestErrors(async (
       response.status(200).json({
         id: user.get('id'),
         username: user.get('username'),
-        roles: user.get('roles'),
+        role: user.get('role'),
         token: createToken(
           response,
           user.get('id')

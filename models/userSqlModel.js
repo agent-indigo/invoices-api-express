@@ -1,7 +1,4 @@
-import {
-  DataTypes,
-  Op
-} from 'sequelize'
+import {DataTypes} from 'sequelize'
 import createId from '../utilities/createId.js'
 import sequelize from '../utilities/sequelize.js'
 const userSqlModel = sequelize.models.User ?? sequelize.define(
@@ -27,59 +24,27 @@ const userSqlModel = sequelize.models.User ?? sequelize.define(
       type: DataTypes.STRING,
       allowNull: false
     },
-    roles: {
-      type: DataTypes.ARRAY(DataTypes.ENUM(
+    role: {
+      type: DataTypes.ENUM(
         'root',
         'user'
-      )),
+      ),
       allowNull: false,
-      defaultValue: [
-        'user'
-      ]
-    },
-    authorities: {
-      type: DataTypes.BLOB,
-      allowNull: true
-    },
-    account_non_expired: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: true
-    },
-    account_non_locked: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: true
-    },
-    credentials_non_expired: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: true
-    },
-    enabled: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: true
+      defaultValue: 'user'
     }
   }, {
     tableName: 'users',
     timestamps: true,
     hooks: {
       beforeCreate: async user => {
-        if (user.get('roles').includes('root')) if (await userSqlModel.findOne({
+        if (user.get('role') === 'root') if (await userSqlModel.findOne({
           where: {
-            roles: {
-              [
-                Op.contains
-              ]: [
-                'root'
-              ]
-            }
+            role: 'root'
           }
         })) throw new Error('The root user already exists.')
       },
       beforeDestroy: async user => {
-        if (user.get('roles').includes('root')) throw new Error('The root user shouldn\'t be deleted.')
+        if (user.get('role') === 'root') throw new Error('The root user shouldn\'t be deleted.')
       }
     }
   }

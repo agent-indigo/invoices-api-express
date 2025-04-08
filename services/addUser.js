@@ -28,7 +28,8 @@ const addUser = catchRequestErrors(async (
       password: await bcrypt.hash(
         password,
         12
-      )
+      ),
+      role: 'user'
     })
     response.status(201).json({
       message: `User created.`

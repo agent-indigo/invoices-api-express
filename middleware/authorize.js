@@ -5,16 +5,11 @@ const authorize = (...roles) => catchRequestErrors(async (
   response,
   next
 ) => {
-  let authorized = false
-  const user = await userSqlModel.findByPk(request.id)
-  if (user) {
-    for (const role in roles) if (user.get('roles').includes(role)) authorized = true
-    if (authorized) {
-      next()
-    } else {
-      response.status(401)
-      throw new Error('Permission denied.')
-    }
+  if (roles.includes((await userSqlModel.findByPk(request.id)).get('role'))) {
+    next()
+  } else {
+    response.status(401)
+    throw new Error('Permission denied.')
   }
 })
 export default authorize

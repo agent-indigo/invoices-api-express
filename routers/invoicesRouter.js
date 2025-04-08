@@ -8,7 +8,10 @@ import authenticate from '../middleware/authenticate.js'
 import authorize from '../middleware/authorize.js'
 const invoicesRouter = Router()
 invoicesRouter.use(authenticate)
-invoicesRouter.use(authorize('user'))
+invoicesRouter.use(authorize(
+  'root',
+  'user'
+))
 invoicesRouter.get(
   '/',
   listInvoices

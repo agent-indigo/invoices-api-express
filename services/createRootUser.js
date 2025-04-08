@@ -28,10 +28,7 @@ const createRootUser = catchRequestErrors(async (
         password,
         12
       ),
-      roles: [
-        'root',
-        'user'
-      ]
+      role: 'root'
     })
     response.status(201).json({
       message: 'User "root" created.'

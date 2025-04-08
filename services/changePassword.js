@@ -49,7 +49,7 @@ const changePassword = catchRequestErrors(async (
       response.status(200).json({
         id: user.get('id'),
         username: user.get('username'),
-        roles: user.get('roles'),
+        role: user.get('role'),
         createdAt: user.get('createdAt'),
         updatedAt: user.get('updatedAt')
       })
