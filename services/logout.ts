@@ -13,7 +13,7 @@ import catchRequestErrors from '@/middleware/catchRequestErrors'
 const logout: RequestHandler = catchRequestErrors(async (
   request: Request,
   response: Response
-): Promise<Response> => response
-.clearCookie('token')
-.status(204))
+): Promise<void> => {
+  response.clearCookie('token').status(204)
+})
 export default logout

@@ -14,13 +14,13 @@ import userSqlModel from '@/models/userSqlModel'
 const listUsers: RequestHandler = catchRequestErrors(async (
   request: Request,
   response: Response
-): Promise<Response> => response
-.status(200)
-.json(await userSqlModel.findAll({
-  attributes: {
-    exclude: [
-      'password'
-    ]
-  }
-})))
+): Promise<void> => {
+  response.status(200).json(await userSqlModel.findAll({
+    attributes: {
+      exclude: [
+        'password'
+      ]
+    }
+  }))
+})
 export default listUsers

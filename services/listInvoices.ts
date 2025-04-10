@@ -14,7 +14,7 @@ import invoiceSqlModel from '@/models/invoiceSqlModel'
 const listInvoices: RequestHandler = catchRequestErrors(async (
   request: Request,
   response: Response
-): Promise<Response> => response
-.status(200)
-.json(await invoiceSqlModel.findAll()))
+): Promise<void> => {
+  response.status(200).json(await invoiceSqlModel.findAll())
+})
 export default listInvoices

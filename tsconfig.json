@@ -5,7 +5,6 @@
     "lib": [
       "ESNext"
     ],
-    "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
     "esModuleInterop": true,
