@@ -38,7 +38,7 @@ const login: RequestHandler = catchRequestErrors(async (
   } else {
     if (!bcrypt.compare(
       password,
-      user.get('password')
+      user.get('password') as string
     )) {
       response.status(401)
       throw new Error('Incorrect password.')

@@ -29,10 +29,10 @@ const resetPassword: RequestHandler = catchRequestErrors(async (
     response.status(404)
     throw new Error('User not found.')
   } else {
-    if (await userSqlModel.findByPk(jwt.verify(
+    if ((await userSqlModel.findByPk(jwt.verify(
       request.cookies.token ?? request.header('Authorization')?.substring(7),
       process.env.JWT_SECRET ?? 'd3v3l0pm3nt53cr3tk3yn0t53cur3@t@11n3v3ru53!npr0duct!0n3v3r!!!'
-    ).id).get('id') === user.get('id')) {
+    ).id))?.get('id') === user.get('id')) {
       response.status(401)
       throw new Error('You can\'t change your own password this way.')
     } else if (!newPassword || !confirmNewPassword) {

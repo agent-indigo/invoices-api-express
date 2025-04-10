@@ -38,7 +38,7 @@ const changePassword: RequestHandler = catchRequestErrors(async (
       throw new Error('At least one field is empty.')
     } else if (!bcrypt.compare(
       currentPassword,
-      user.get('password')
+      user.get('password') as string
     )) {
       response.status(401)
       throw new Error('Incorrect password.')
