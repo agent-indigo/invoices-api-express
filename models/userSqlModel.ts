@@ -3,8 +3,8 @@ import {
   Model,
   ModelStatic
 } from 'sequelize'
-import createId from '../utilities/createId'
-import sequelize from '../utilities/sequelize'
+import createId from '@/utilities/createId'
+import sequelize from '@/utilities/sequelize'
 import UserSqlRecord from '@/types/UserSqlRecord'
 const userSqlModel: ModelStatic<Model<UserSqlRecord>> = sequelize.models.User ?? sequelize.define<Model<UserSqlRecord>>(
   'User', {

@@ -1,10 +1,12 @@
-import bcrypt from 'bcryptjs'
+import {
+  compareSync,
+  hashSync
+} from 'bcryptjs'
 import {
   Request,
   RequestHandler,
   Response
 } from 'express'
-import jwt from 'jsonwebtoken'
 import {Model} from 'sequelize'
 import catchRequestErrors from '@/middleware/catchRequestErrors'
 import userSqlModel from '@/models/userSqlModel'
@@ -20,23 +22,20 @@ const changePassword: RequestHandler = catchRequestErrors(async (
   request: Request,
   response: Response
 ): Promise<void> => {
-  const {
-    currentPassword,
-    newPassword,
-    confirmNewPassword
-  }: NewPassword = JSON.parse(request.body)
-  const user: Model<UserSqlRecord> | null = await userSqlModel.findByPk(jwt.verify(
-    request.cookies.token ?? request.header('Authorization')?.substring(7),
-    process.env.JWT_SECRET ?? 'd3v3l0pm3nt53cr3tk3yn0t53cur3@t@11n3v3ru53!npr0duct!0n3v3r!!!'
-  ).id)
+  const user: Model<UserSqlRecord> | null = await userSqlModel.findByPk(request.params.userId)
   if (!user) {
     response.status(404)
     throw new Error('User not found.')
   } else {
+    const {
+      currentPassword,
+      newPassword,
+      confirmNewPassword
+    }: NewPassword = JSON.parse(request.body)
     if (!currentPassword || !newPassword || !confirmNewPassword) {
       response.status(400)
       throw new Error('At least one field is empty.')
-    } else if (!bcrypt.compare(
+    } else if (!compareSync(
       currentPassword,
       user.get('password') as string
     )) {
@@ -48,7 +47,7 @@ const changePassword: RequestHandler = catchRequestErrors(async (
     } else {
       user.set(
         'password',
-        await bcrypt.hash(
+        hashSync(
           newPassword,
           12
         )

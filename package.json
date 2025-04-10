@@ -1,5 +1,5 @@
 {
-  "name": "invoices-api-express",
+  "name": "invoices-api",
   "version": "1.2.2",
   "private": true,
   "type": "module",
