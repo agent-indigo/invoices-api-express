@@ -1,9 +1,9 @@
 import SqlRecord from '@/types/SqlRecord'
 export default interface InvoiceSqlRecord extends SqlRecord {
-  vendor: String
-  subtotal: Number
-  hst: Number
-  total: Number
-  invoiceId: String
+  vendor: string
+  subtotal: number
+  hst: number
+  total: number
+  invoiceId: string
   date: Date
 }

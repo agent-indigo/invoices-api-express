@@ -1,9 +1,10 @@
 import {
   Request,
   Response,
-  NextFunction
+  NextFunction,
+  RequestHandler
 } from 'express'
-const catchRequestErrors: Function = (fn: Function): any => (
+const catchRequestErrors: Function = (fn: RequestHandler): any => (
   request: Request,
   response: Response,
   next: NextFunction

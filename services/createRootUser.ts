@@ -1,26 +1,28 @@
 import bcrypt from 'bcryptjs'
 import {
   Request,
+  RequestHandler,
   Response
 } from 'express'
 import {Model} from 'sequelize'
 import catchRequestErrors from '@/middleware/catchRequestErrors'
 import userSqlModel from '@/models/userSqlModel'
 import UserSqlRecord from '@/types/UserSqlRecord'
+import NewUser from '@/types/NewUser'
 /**
  * @name    createRootUser
  * @desc    Create the root user
  * @route   POST /config/root
  * @access  public
  */
-const createRootUser: Function = catchRequestErrors(async (
+const createRootUser: RequestHandler = catchRequestErrors(async (
   request: Request,
   response: Response
 ): Promise<void> => {
   const {
     password,
     confirmPassword
-  } = await request.json()
+  }: NewUser = JSON.parse(request.body)
   if (password !== confirmPassword) {
     response.status(400)
     throw new Error('Passwords do not match.')

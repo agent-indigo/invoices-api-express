@@ -1,5 +1,5 @@
 import {DataTypes} from 'sequelize'
-const createTimeStamps: Function = (): Object => {
+const createTimeStamps: Function = (): object => {
   return {
     createdAt: {
       type: DataTypes.DATE,

@@ -22,8 +22,10 @@ const editinvoice: RequestHandler = catchRequestErrors(async (
     response.status(404)
     throw new Error('Invoice not found.')
   } else {
-    await invoice.update(await request.json())
-    response.status(200).json(invoice)
+    await invoice.update(JSON.parse(request.body))
+    response.status(200).json({
+      ...invoice.toJSON()
+    })
   }
 })
 export default editinvoice

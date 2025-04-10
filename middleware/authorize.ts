@@ -5,12 +5,12 @@ import {
 } from 'express'
 import catchRequestErrors from '@/middleware/catchRequestErrors'
 import userSqlModel from '@/models/userSqlModel'
-const authorize: Function = (...roles: String[]): void => catchRequestErrors(async (
+const authorize: Function = (...roles: string[]): void => catchRequestErrors(async (
   request: Request,
   response: Response,
   next: NextFunction
 ): Promise<void> => {
-  if (roles.includes((await userSqlModel.findByPk(request.id)).get('role'))) {
+  if (roles.includes((await userSqlModel.findByPk(request.params.id))?.get('role'))) {
     next()
   } else {
     response.status(401)

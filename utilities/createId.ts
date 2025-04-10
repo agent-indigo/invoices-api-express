@@ -1,5 +1,5 @@
 import {DataTypes} from 'sequelize'
-const createId: Function = (): Object => {
+const createId: Function = (): object => {
   return {
     id: {
       type: DataTypes.UUID,

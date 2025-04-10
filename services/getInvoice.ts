@@ -22,7 +22,9 @@ const getInvoice: RequestHandler = catchRequestErrors(async (
     response.status(404)
     throw new Error('Invoice not found.')
   } else {
-    response.status(200).json(invoice)
+    response.status(200).json({
+      ...invoice.toJSON()
+    })
   }
 })
 export default getInvoice

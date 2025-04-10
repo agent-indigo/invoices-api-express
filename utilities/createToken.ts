@@ -2,8 +2,8 @@ import {Response} from 'express'
 import jwt from 'jsonwebtoken'
 const createToken: Function = (
   response: Response,
-  id: String
-): String => {
+  id: string
+): string => {
   const token = jwt.sign({
     id
   },

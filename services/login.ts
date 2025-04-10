@@ -9,6 +9,7 @@ import catchRequestErrors from '@/middleware/catchRequestErrors'
 import createToken from '@/utilities/createToken'
 import userSqlModel from '@/models/userSqlModel'
 import UserSqlRecord from '@/types/UserSqlRecord'
+import Credentials from '@/types/Credentials'
 /**
  * @name    login
  * @desc    Log in a user
@@ -22,7 +23,7 @@ const login: RequestHandler = catchRequestErrors(async (
   const {
     username,
     password
-  } = await request.json()
+  }: Credentials = JSON.parse(request.body)
   const user: Model<UserSqlRecord> | null = await userSqlModel.findOne({
     where: {
       username
@@ -46,12 +47,12 @@ const login: RequestHandler = catchRequestErrors(async (
         id: user.get('id'),
         username: user.get('username'),
         role: user.get('role'),
+        createdAt: user.get('createdAt'),
+        updatedAt: user.get('updatedAt'),
         token: createToken(
           response,
           user.get('id')
-        ),
-        createdAt: user.get('createdAt'),
-        updatedAt: user.get('updatedAt')
+        )
       })
     }
   }
