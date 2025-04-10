@@ -10,7 +10,7 @@ const authorize: Function = (...roles: string[]): void => catchRequestErrors(asy
   response: Response,
   next: NextFunction
 ): Promise<void> => {
-  if (roles.includes((await userSqlModel.findByPk(request.params.id))?.get('role') as string)) {
+  if (roles.includes((await userSqlModel.findByPk(request.params.userId))?.get('role') as string)) {
     next()
   } else {
     response.status(401)

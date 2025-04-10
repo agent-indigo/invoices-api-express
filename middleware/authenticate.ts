@@ -21,6 +21,7 @@ const authenticate: RequestHandler = catchRequestErrors(async (
       process.env.JWT_SECRET ?? 'd3v3l0pm3nt53cr3tk3yn0t53cur3@t@11n3v3ru53!npr0duct!0n3v3r!!!'
     ).id)
     if (user) {
+      request.params.userId = user.get('id') as string
       next()
     } else {
       response.status(401)
