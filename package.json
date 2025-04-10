@@ -1,12 +1,13 @@
 {
-  "name": "invoices-api-js",
-  "version": "1.0.0",
+  "name": "invoices-api-express",
+  "version": "1.2.2",
   "private": true,
   "type": "module",
   "main": "app.js",
   "scripts": {
     "start": "NODE_ENV=production node app",
-    "dev": "NODE_ENV=development nodemon app"
+    "dev": "NODE_ENV=development nodemon tsnode app.ts",
+    "build": "tsc"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -23,8 +24,19 @@
     "sequelize": "^6.37.3"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cookie-parser": "^1.4.8",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.1",
+    "@types/hpp": "^0.2.6",
+    "@types/jsonwebtoken": "^9.0.9",
+    "@types/morgan": "^1.9.9",
+    "@types/node": "^22.14.0",
+    "@types/pg": "^8.11.11",
     "nodemon": "^3.1.4",
     "prettier": "^3.3.3",
-    "sequelize-cli": "^6.6.2"
+    "sequelize-cli": "^6.6.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
   }
 }

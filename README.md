@@ -2,7 +2,7 @@
 
 ## Description
 
-A simple invoice management API using Express.js and Sequelize
+A simple invoice management RESTful API
 
 ## User Roles
 
@@ -14,7 +14,7 @@ A simple invoice management API using Express.js and Sequelize
 
 - Only the PostgreSQL driver is included by default.
 
-- A React.js front end is available [here](https://github.com/agent-indigo/invoices-web).
+- A front end is available [here](https://github.com/agent-indigo/invoices-web).
 
 ## Setup
 

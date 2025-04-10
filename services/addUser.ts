@@ -1,0 +1,48 @@
+import bcrypt from 'bcryptjs'
+import {
+  Request,
+  Response
+} from 'express'
+import {Model} from 'sequelize'
+import catchRequestErrors from '@/middleware/catchRequestErrors'
+import userSqlModel from '@/models/userSqlModel'
+import UserSqlRecord from '@/types/UserSqlRecord'
+/**
+ * @name    addUser
+ * @desc    Add a new user
+ * @route   POST /users
+ * @access  private/root
+ */
+const addUser: Function = catchRequestErrors(async (
+  request: Request,
+  response: Response
+): Promise<void> => {
+  const {
+    username,
+    password,
+    confirmPassword
+  } = await request.json()
+  if (password !== confirmPassword) {
+    response.status(400)
+    throw new Error('Passwords do not match.')
+  } else if (!username || !password || !confirmPassword) {
+    response.status(400)
+    throw new Error('At least one field is empty.')
+  } else {
+    const user: Model<UserSqlRecord> = await userSqlModel.create({
+      username,
+      password: await bcrypt.hash(
+        password,
+        12
+      ),
+      role: 'user'
+    })
+    response.status(201).json({
+      id: user.get('id'),
+      username: user.get('username'),
+      role: user.get('role'),
+      createdAt: user.get('createdAt')
+    })
+  }
+})
+export default addUser
