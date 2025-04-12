@@ -39,10 +39,10 @@ const createRootUser: RequestHandler = catchRequestErrors(async (
       role: 'root'
     })
     response.status(201).json({
-      id: root.get('id'),
+      id: root.getDataValue('id'),
       username: 'root',
       role: 'root',
-      createdAt: root.get('createdAt')
+      createdAt: root.getDataValue('createdAt')
     })
   }
 })

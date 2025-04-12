@@ -39,7 +39,7 @@ const resetPassword: RequestHandler = catchRequestErrors(async (
         response.status(400)
         throw new Error('New passwords do not match.')
       } else {
-        user.set(
+        user.setDataValue(
           'password',
           hashSync(
             newPassword,
@@ -48,11 +48,11 @@ const resetPassword: RequestHandler = catchRequestErrors(async (
         )
         await user.save()
         response.status(200).json({
-          id: user.get('id'),
-          username: user.get('username'),
-          role: user.get('role'),
-          createdAt: user.get('createdAt'),
-          updatedAt: user.get('updatedAt')
+          id: user.getDataValue('id'),
+          username: user.getDataValue('username'),
+          role: 'user',
+          createdAt: user.getDataValue('createdAt'),
+          updatedAt: user.getDataValue('updatedAt')
         })
       }
     }

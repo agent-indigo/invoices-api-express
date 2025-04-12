@@ -37,7 +37,7 @@ const changePassword: RequestHandler = catchRequestErrors(async (
       throw new Error('At least one field is empty.')
     } else if (!compareSync(
       currentPassword,
-      user.get('password') as string
+      user.getDataValue('password')
     )) {
       response.status(401)
       throw new Error('Incorrect password.')
@@ -45,7 +45,7 @@ const changePassword: RequestHandler = catchRequestErrors(async (
       response.status(400)
       throw new Error('New passwords do not match.')
     } else {
-      user.set(
+      user.setDataValue(
         'password',
         hashSync(
           newPassword,
@@ -54,11 +54,11 @@ const changePassword: RequestHandler = catchRequestErrors(async (
       )
       await user.save()
       response.status(200).json({
-        id: user.get('id'),
-        username: user.get('username'),
-        role: user.get('role'),
-        createdAt: user.get('createdAt'),
-        updatedAt: user.get('updatedAt')
+        id: user.getDataValue('id'),
+        username: user.getDataValue('username'),
+        role: user.getDataValue('role'),
+        createdAt: user.getDataValue('createdAt'),
+        updatedAt: user.getDataValue('updatedAt')
       })
     }
   }

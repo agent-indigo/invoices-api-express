@@ -38,20 +38,20 @@ const login: RequestHandler = catchRequestErrors(async (
   } else {
     if (!compareSync(
       password,
-      user.get('password') as string
+      user.getDataValue('password')
     )) {
       response.status(401)
       throw new Error('Incorrect password.')
     } else {
       response.status(200).json({
-        id: user.get('id'),
-        username: user.get('username'),
-        role: user.get('role'),
-        createdAt: user.get('createdAt'),
-        updatedAt: user.get('updatedAt'),
+        id: user.getDataValue('id'),
+        username: user.getDataValue('username'),
+        role: user.getDataValue('role'),
+        createdAt: user.getDataValue('createdAt'),
+        updatedAt: user.getDataValue('updatedAt'),
         token: createToken(
           response,
-          user.get('id')
+          user.getDataValue('id')
         )
       })
     }

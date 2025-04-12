@@ -10,21 +10,18 @@ const db: Db = {
   Sequelize,
   sequelize
 }
-const url: string = import.meta.url
-for (const file of readdirSync(new URL(
+const url: URL = new URL(
   '.',
   import.meta.url
-)).filter((fileName: String): boolean => (
+)
+for (const file of readdirSync(url).filter((fileName: String): boolean => (
   fileName.indexOf('.') !== 0 &&
-  fileName !== basename(url) &&
+  fileName !== basename(url.toString()) &&
   fileName.slice(-11) === 'SqlModel.ts' &&
   fileName.indexOf('.test') === -1
 ))) {
   const model: any = await import(join(
-    new URL(
-      '.',
-      url
-    ).toString(),
+    url.toString(),
     file
   ))
   db[model.default.name] = model.default

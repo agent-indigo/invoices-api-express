@@ -40,10 +40,10 @@ const addUser: RequestHandler = catchRequestErrors(async (
       role: 'user'
     })
     response.status(201).json({
-      id: user.get('id'),
-      username: user.get('username'),
-      role: user.get('role'),
-      createdAt: user.get('createdAt')
+      id: user.getDataValue('id'),
+      username: user.getDataValue('username'),
+      role: 'user',
+      createdAt: user.getDataValue('createdAt')
     })
   }
 })
