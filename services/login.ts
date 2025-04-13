@@ -1,4 +1,4 @@
-import {compareSync} from 'bcryptjs'
+import bcrypt from 'bcryptjs'
 import {
   Request,
   RequestHandler,
@@ -36,7 +36,7 @@ const login: RequestHandler = catchRequestErrors(async (
     response.status(404)
     throw new Error('User not found.')
   } else {
-    if (!compareSync(
+    if (!bcrypt.compareSync(
       password,
       user.getDataValue('password')
     )) {

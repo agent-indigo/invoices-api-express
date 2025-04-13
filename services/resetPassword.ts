@@ -1,4 +1,4 @@
-import {hashSync} from 'bcryptjs'
+import bcrypt from 'bcryptjs'
 import {
   Request,
   RequestHandler,
@@ -41,7 +41,7 @@ const resetPassword: RequestHandler = catchRequestErrors(async (
       } else {
         user.setDataValue(
           'password',
-          hashSync(
+          bcrypt.hashSync(
             newPassword,
             12
           )

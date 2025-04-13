@@ -1,7 +1,4 @@
-import {
-  compareSync,
-  hashSync
-} from 'bcryptjs'
+import bcrypt from 'bcryptjs'
 import {
   Request,
   RequestHandler,
@@ -35,7 +32,7 @@ const changePassword: RequestHandler = catchRequestErrors(async (
     if (!currentPassword || !newPassword || !confirmNewPassword) {
       response.status(400)
       throw new Error('At least one field is empty.')
-    } else if (!compareSync(
+    } else if (!bcrypt.compareSync(
       currentPassword,
       user.getDataValue('password')
     )) {
@@ -47,7 +44,7 @@ const changePassword: RequestHandler = catchRequestErrors(async (
     } else {
       user.setDataValue(
         'password',
-        hashSync(
+        bcrypt.hashSync(
           newPassword,
           12
         )

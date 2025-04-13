@@ -4,7 +4,7 @@ import {
   ModelStatic
 } from 'sequelize'
 import createId from '@/utilities/createId'
-import sequelize from '@/utilities/sequelize'
+import sequelize from '@/config/sequelize'
 import UserSqlRecord from '@/types/UserSqlRecord'
 const userSqlModel: ModelStatic<Model<UserSqlRecord>> = sequelize.models.User ?? sequelize.define<Model<UserSqlRecord>>(
   'User', {
@@ -42,14 +42,14 @@ const userSqlModel: ModelStatic<Model<UserSqlRecord>> = sequelize.models.User ??
     timestamps: true,
     hooks: {
       beforeCreate: async (user: Model<UserSqlRecord>): Promise<void> => {
-        if (user.get('role') === 'root') if (await userSqlModel.findOne({
+        if (user.getDataValue('role') === 'root') if (await userSqlModel.findOne({
           where: {
             role: 'root'
           }
         })) throw new Error('The root user already exists.')
       },
       beforeDestroy: (user: Model<UserSqlRecord>): void => {
-        if (user.get('role') === 'root') throw new Error('The root user shouldn\'t be deleted.')
+        if (user.getDataValue('role') === 'root') throw new Error('The root user shouldn\'t be deleted.')
       }
     }
   }

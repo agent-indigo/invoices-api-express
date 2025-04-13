@@ -1,4 +1,4 @@
-import {hashSync} from 'bcryptjs'
+import bcrypt from 'bcryptjs'
 import {
   Request,
   RequestHandler,
@@ -32,7 +32,7 @@ const createRootUser: RequestHandler = catchRequestErrors(async (
   } else {
     const root: Model<UserSqlRecord> = await userSqlModel.create({
       username: 'root',
-      password: hashSync(
+      password: bcrypt.hashSync(
         password,
         12
       ),
