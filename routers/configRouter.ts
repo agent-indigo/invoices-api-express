@@ -7,7 +7,7 @@ configRouter.get(
   getConfigStatus
 )
 configRouter.post(
-  '/rootUserPassword',
+  '/rootPassword',
   createRootUser
 )
 export default configRouter
