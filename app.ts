@@ -1,10 +1,7 @@
 import 'dotenv/config'
-import {createWriteStream} from 'fs'
-import {
-  dirname,
-  join
-} from 'path'
-import {fileURLToPath} from 'url'
+import fs from 'fs'
+import path from 'path'
+import url from 'url'
 import express, {Express} from 'express'
 import morgan from 'morgan'
 import cookieParser from 'cookie-parser'
@@ -33,9 +30,9 @@ app.use(rateLimit({
 }))
 process.env.NODE_ENV === 'development' && app.use(morgan(
   ':url,:method,:status,:response-time,:date[web]', {
-    stream: createWriteStream(
-      join(
-        dirname(fileURLToPath(import.meta.url)),
+    stream: fs.createWriteStream(
+      path.join(
+        path.dirname(url.fileURLToPath(import.meta.url)),
         'log.csv'
       ), {
         flags: 'a'
