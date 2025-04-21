@@ -57,7 +57,7 @@ app.use(sendErrorResponses)
 await connectToSqlDb()
 app.listen(
   8080,
-  () => console.log(`Listening on http${
+  (): void => console.log(`Listening on http${
     process.env.NODE_ENV === 'production' ? 's' : ''
   }://${
     process.env.DOMAIN ?? 'localhost'
