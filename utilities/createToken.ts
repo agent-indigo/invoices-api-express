@@ -10,9 +10,9 @@ const createToken: Function = (
     iss: 'invoices.api',
     aud: 'invoices.client',
     sub: id,
-    iat: Math.floor(Date.now() / 1000),
-    nbf: Math.floor(Date.now() / 1000),
-    exp: Math.floor(Date.now() / 1000) + 2592000
+    iat: Math.floor(Date.now() / 1000) - 30,
+    nbf: Math.floor(Date.now() / 1000) - 30,
+    exp: Math.floor(Date.now() / 1000) + 2592030
   },
     process.env.JWT_SECRET ?? 'd3v3l0pm3nt53cr3tk3yn0t53cur3@t@11n3v3ru53!npr0duct!0n3v3r!!!'
   )
@@ -22,7 +22,7 @@ const createToken: Function = (
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production' ? true : false,
       sameSite: 'strict',
-      maxAge: 25920000,
+      maxAge: 25920030,
     }
   )
   return token

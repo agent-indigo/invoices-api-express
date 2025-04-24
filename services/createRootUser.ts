@@ -9,6 +9,7 @@ import catchRequestErrors from '@/middleware/catchRequestErrors'
 import userSqlModel from '@/models/userSqlModel'
 import UserSqlRecord from '@/types/UserSqlRecord'
 import NewUser from '@/types/NewUser'
+import createToken from '@/utilities/createToken'
 /**
  * @name    createRootUser
  * @desc    Create the root user
@@ -42,7 +43,12 @@ const createRootUser: RequestHandler = catchRequestErrors(async (
       id: root.getDataValue('id'),
       username: 'root',
       role: 'root',
-      createdAt: root.getDataValue('createdAt')
+      createdAt: root.getDataValue('createdAt'),
+      updatedAt: root.getDataValue('updatedAt'),
+      token: createToken(
+        response,
+        root.getDataValue('id')
+      )
     })
   }
 })

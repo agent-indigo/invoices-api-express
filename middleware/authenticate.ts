@@ -37,10 +37,10 @@ const authenticate: RequestHandler = catchRequestErrors(async (
       } else if (typeof nbf !== 'number' || typeof exp !== 'number') {
         response.status(401)
         throw new Error('Token unreadable.')
-      } else if (nbf > Math.floor(Date.now() / 1000)) {
+      } else if (nbf > Math.floor(Date.now() / 1000) - 30) {
         response.status(401)
         throw new Error('Token not yet valid.')
-      } else if (exp < Math.floor(Date.now() / 1000)) {
+      } else if (exp < Math.floor(Date.now() / 1000) + 30) {
         response.status(401)
         throw new Error('Token expired.')
       } else {
