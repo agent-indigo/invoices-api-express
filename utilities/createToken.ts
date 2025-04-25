@@ -20,7 +20,7 @@ const createToken: Function = (
     'token',
     token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production' ? true : false,
+      secure: process.env.NODE_ENV === 'production',
       sameSite: 'strict',
       maxAge: 25920030,
     }

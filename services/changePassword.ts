@@ -9,6 +9,7 @@ import catchRequestErrors from '@/middleware/catchRequestErrors'
 import userSqlModel from '@/models/userSqlModel'
 import UserSqlRecord from '@/types/UserSqlRecord'
 import NewPassword from '@/types/NewPassword'
+import createToken from '@/utilities/createToken'
 /**
  * @name    changePassword
  * @desc    Change the current user's password
@@ -55,7 +56,11 @@ const changePassword: RequestHandler = catchRequestErrors(async (
         username: user.getDataValue('username'),
         role: user.getDataValue('role'),
         createdAt: user.getDataValue('createdAt'),
-        updatedAt: user.getDataValue('updatedAt')
+        updatedAt: user.getDataValue('updatedAt'),
+        token: createToken(
+          response,
+          user.getDataValue('id')
+        )
       })
     }
   }
