@@ -43,7 +43,8 @@ const addUser: RequestHandler = catchRequestErrors(async (
       id: user.getDataValue('id'),
       username: user.getDataValue('username'),
       role: 'user',
-      createdAt: user.getDataValue('createdAt')
+      createdAt: user.getDataValue('createdAt'),
+      updatedAt: user.getDataValue('updatedAt')
     })
   }
 })
