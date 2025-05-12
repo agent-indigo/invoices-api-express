@@ -1,4 +1,4 @@
-import {randomUUID} from 'crypto'
+import crypto from 'crypto'
 import {Response} from 'express'
 import jwt from 'jsonwebtoken'
 const createToken: Function = (
@@ -6,7 +6,7 @@ const createToken: Function = (
   id: string
 ): string => {
   const token = jwt.sign({
-    jti: randomUUID().toString(),
+    jti: crypto.randomUUID().toString(),
     iss: 'invoices.api',
     aud: 'invoices.client',
     sub: id,
