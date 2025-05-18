@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:lts
 WORKDIR /invoices-api
 COPY . .
 RUN npm i --production

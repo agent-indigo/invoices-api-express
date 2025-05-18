@@ -1,9 +1,18 @@
 version: '3.8'
 services:
+  database:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: invoices
+    ports:
+      - "5432:5432"
+    volumes:
+      - database:/var/lib/postgresql/data
   invoices-api:
+    image: invoices-api:latest
     build:
       context: .
       dockerfile: Dockerfile
-    image: invoices-api:latest
     ports:
       - "8080:8080"
