@@ -24,7 +24,7 @@ const createToken: Function = (
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'strict',
-      maxAge: 25920030,
+      maxAge: 2592030,
     }
   )
   return token
