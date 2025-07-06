@@ -31,7 +31,7 @@ const authenticate: RequestHandler = catchRequestErrors(async (
       if (iss !== 'invoices.api') {
         response.status(401)
         throw new Error('Invalid token issuer.')
-      } else if (aud !== 'invoices.client') {
+      } else if (!aud?.includes('invoices.client')) {
         response.status(401)
         throw new Error('Invalid token audience.')
       } else if (typeof nbf !== 'number' || typeof exp !== 'number') {

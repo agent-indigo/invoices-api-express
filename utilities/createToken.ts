@@ -8,7 +8,9 @@ const createToken: Function = (
   const token = jwt.sign({
     jti: crypto.randomUUID().toString(),
     iss: 'invoices.api',
-    aud: 'invoices.client',
+    aud: [
+      'invoices.client'
+    ],
     sub: id,
     iat: Math.floor(Date.now() / 1000) - 30,
     nbf: Math.floor(Date.now() / 1000) - 30,
