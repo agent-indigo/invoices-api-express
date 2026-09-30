@@ -1,6 +1,6 @@
 .vscode/
 node_modules/
+target/
 .env
 log.csv
-jsconfig.json
-**/*.js
+tsconfig.tsbuildinfo

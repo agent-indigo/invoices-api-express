@@ -8,21 +8,18 @@
     "skipLibCheck": true,
     "strict": true,
     "esModuleInterop": true,
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
     "isolatedModules": true,
     "incremental": true,
-    "rootDir": ".",
-    "outDir": ".",
-    "baseUrl": ".",
+    "rootDir": "src",
+    "outDir": "target",
     "paths": {
       "@/*": [
-        "./*"
+        "./src/*"
       ]
     }
   },
   "include": [
-    "**/*.ts"
+    "src/**/*.ts"
   ],
   "exclude": [
     "node_modules"
