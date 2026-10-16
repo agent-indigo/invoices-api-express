@@ -8,7 +8,7 @@ import {Model} from 'sequelize'
 import catchRequestErrors from '@/middleware/catchRequestErrors'
 import createToken from '@/utilities/createToken'
 import userSqlModel from '@/models/userSqlModel'
-import UserSqlRecord from '@/types/UserSqlRecord'
+import User from '@/types/User'
 import Credentials from '@/types/Credentials'
 /**
  * @name    login
@@ -24,7 +24,7 @@ const login: RequestHandler = catchRequestErrors(async (
     username,
     password
   }: Credentials = JSON.parse(request.body)
-  const user: Model<UserSqlRecord> | null = await userSqlModel.findOne({
+  const user: Model<User> | null = await userSqlModel.findOne({
     where: {
       username
     }

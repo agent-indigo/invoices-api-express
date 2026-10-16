@@ -8,7 +8,7 @@ import jwt, {JwtPayload} from 'jsonwebtoken'
 import {Model} from 'sequelize'
 import catchRequestErrors from '@/middleware/catchRequestErrors'
 import userSqlModel from '@/models/userSqlModel'
-import UserSqlRecord from '@/types/UserSqlRecord'
+import User from '@/types/User'
 const authenticate: RequestHandler = catchRequestErrors(async (
   request: Request,
   response: Response,
@@ -44,7 +44,7 @@ const authenticate: RequestHandler = catchRequestErrors(async (
         response.status(401)
         throw new Error('Token expired.')
       } else {
-        const user: Model<UserSqlRecord> | null = await userSqlModel.findByPk(sub)
+        const user: Model<User> | null = await userSqlModel.findByPk(sub)
         if (user) {
           request.params.userId = user.getDataValue('id') ?? ''
           next()

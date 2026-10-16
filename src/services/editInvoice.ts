@@ -6,7 +6,7 @@ import {
 import {Model} from 'sequelize'
 import catchRequestErrors from '@/middleware/catchRequestErrors'
 import invoiceSqlModel from '@/models/invoiceSqlModel'
-import InvoiceSqlRecord from '@/types/InvoiceSqlRecord'
+import Invoice from '@/types/Invoice'
 /**
  * @name    editInvoice
  * @desc    Edit a Invoice
@@ -17,7 +17,7 @@ const editinvoice: RequestHandler = catchRequestErrors(async (
   request: Request,
   response: Response
 ): Promise<void> => {
-  const invoice: Model<InvoiceSqlRecord> | null = await invoiceSqlModel.findByPk(request.params.id)
+  const invoice: Model<Invoice> | null = await invoiceSqlModel.findByPk(request.params.id)
   if (!invoice) {
     response.status(404)
     throw new Error('Invoice not found.')

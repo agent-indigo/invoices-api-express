@@ -6,7 +6,7 @@ import {
 import {Model} from 'sequelize'
 import catchRequestErrors from '@/middleware/catchRequestErrors'
 import userSqlModel from '@/models/userSqlModel'
-import UserSqlRecord from '@/types/UserSqlRecord'
+import User from '@/types/User'
 /**
  * @name    deleteUser
  * @desc    Delete a user
@@ -17,7 +17,7 @@ const deleteUser: RequestHandler = catchRequestErrors(async (
   request: Request,
   response: Response
 ): Promise<void> => {
-  const user: Model<UserSqlRecord> | null = await userSqlModel.findByPk(request.params.id)
+  const user: Model<User> | null = await userSqlModel.findByPk(request.params.id)
   if (!user) {
     response.status(404)
     throw new Error('User not found.')

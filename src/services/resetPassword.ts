@@ -7,7 +7,7 @@ import {
 import {Model} from 'sequelize'
 import catchRequestErrors from '@/middleware/catchRequestErrors'
 import userSqlModel from '@/models/userSqlModel'
-import UserSqlRecord from '@/types/UserSqlRecord'
+import User from '@/types/User'
 import NewPassword from '@/types/NewPassword'
 /**
  * @name    resetPassword
@@ -23,7 +23,7 @@ const resetPassword: RequestHandler = catchRequestErrors(async (
     response.status(401)
     throw new Error('You can\'t change your own password this way.')
   } else {
-    const user: Model<UserSqlRecord> | null = await userSqlModel.findByPk(request.params.id)
+    const user: Model<User> | null = await userSqlModel.findByPk(request.params.id)
     if (!user) {
       response.status(404)
       throw new Error('User not found.')

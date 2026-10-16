@@ -7,7 +7,7 @@ import {
 import {Model} from 'sequelize'
 import catchRequestErrors from '@/middleware/catchRequestErrors'
 import userSqlModel from '@/models/userSqlModel'
-import UserSqlRecord from '@/types/UserSqlRecord'
+import User from '@/types/User'
 import NewUser from '@/types/NewUser'
 /**
  * @name    addUser
@@ -31,7 +31,7 @@ const addUser: RequestHandler = catchRequestErrors(async (
     response.status(400)
     throw new Error('At least one field is empty.')
   } else {
-    const user: Model<UserSqlRecord> = await userSqlModel.create({
+    const user: Model<User> = await userSqlModel.create({
       username,
       password: bcrypt.hashSync(
         password,

@@ -4,18 +4,16 @@ import {
   ModelStatic
 } from 'sequelize'
 import createId from '@/utilities/createId'
-import sequelize from '@/config/sequelize'
-import UserSqlRecord from '@/types/UserSqlRecord'
-const userSqlModel: ModelStatic<Model<UserSqlRecord>> = sequelize.models.User ?? sequelize.define<Model<UserSqlRecord>>(
+import sequelize from '@/configuration/sequelize'
+import User from '@/types/User'
+import connectToSqlDb from '@/utilities/connectToSqlDb'
+const userSqlModel: ModelStatic<Model<User>> = sequelize.models.User ?? sequelize.define<Model<User>>(
   'User', {
     ...createId(),
     username: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: [
-        true,
-        'A user with this name already exists.'
-      ],
+      unique: true,
       validate: {
         notContains: {
           args: [
@@ -30,10 +28,7 @@ const userSqlModel: ModelStatic<Model<UserSqlRecord>> = sequelize.models.User ??
       allowNull: false
     },
     role: {
-      type: DataTypes.ENUM(
-        'root',
-        'user'
-      ),
+      type: DataTypes.STRING,
       allowNull: false,
       defaultValue: 'user'
     }
@@ -41,14 +36,22 @@ const userSqlModel: ModelStatic<Model<UserSqlRecord>> = sequelize.models.User ??
     tableName: 'users',
     timestamps: true,
     hooks: {
-      beforeCreate: async (user: Model<UserSqlRecord>): Promise<void> => {
-        if (user.getDataValue('role') === 'root') if (await userSqlModel.findOne({
+      beforeCreate: async (user: Model<User>): Promise<void> => {
+        await connectToSqlDb()
+        if (await userSqlModel.count({
           where: {
-            role: 'root'
+            role: 'admin'
           }
-        })) throw new Error('The root user already exists.')
+        }) > 0) {
+          throw new Error('The admin user already exists.')
+        } else {
+          user.setDataValue(
+            'role',
+            'admin'
+          )
+        }
       },
-      beforeDestroy: (user: Model<UserSqlRecord>): void => {
+      beforeDestroy: (user: Model<User>): void => {
         if (user.getDataValue('role') === 'root') throw new Error('The root user shouldn\'t be deleted.')
       }
     }

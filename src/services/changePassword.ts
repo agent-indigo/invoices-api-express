@@ -7,7 +7,7 @@ import {
 import {Model} from 'sequelize'
 import catchRequestErrors from '@/middleware/catchRequestErrors'
 import userSqlModel from '@/models/userSqlModel'
-import UserSqlRecord from '@/types/UserSqlRecord'
+import User from '@/types/User'
 import NewPassword from '@/types/NewPassword'
 import createToken from '@/utilities/createToken'
 /**
@@ -20,7 +20,7 @@ const changePassword: RequestHandler = catchRequestErrors(async (
   request: Request,
   response: Response
 ): Promise<void> => {
-  const user: Model<UserSqlRecord> | null = await userSqlModel.findByPk(request.params.userId)
+  const user: Model<User> | null = await userSqlModel.findByPk(request.params.userId)
   if (!user) {
     response.status(404)
     throw new Error('User not found.')
