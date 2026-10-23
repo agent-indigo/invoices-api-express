@@ -1,4 +1,4 @@
-import sequelize from '@/config/sequelize'
+import sequelize from '@/connectors/sequelize'
 const connectToSqlDb: Function = async (): Promise<void> => {
   let connected: boolean = false
   if (!connected) try {

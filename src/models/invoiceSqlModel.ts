@@ -4,7 +4,7 @@ import {
   ModelStatic
 } from 'sequelize'
 import createId from '@/utilities/createId'
-import sequelize from '@/configuration/sequelize'
+import sequelize from '@/connectors/sequelize'
 import Invoice from '@/types/Invoice'
 const invoiceModel: ModelStatic<Model<Invoice>> = sequelize.models.Invoice ?? sequelize.define<Model<Invoice>>(
   'Invoice', {
